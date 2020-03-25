@@ -21,8 +21,7 @@ function OnInit (UIScreen Screen)
 	`MCM_API_Register(Screen, ClientModCallback);
 }
 
-//Simple one group framework code
-simulated function ClientModCallback (MCM_API_Instance ConfigAPI, int GameMode)
+simulated protected function ClientModCallback (MCM_API_Instance ConfigAPI, int GameMode)
 {
 	local MCM_API_SettingsPage Page;
 	local MCM_API_SettingsGroup Group;
@@ -39,24 +38,24 @@ simulated function ClientModCallback (MCM_API_Instance ConfigAPI, int GameMode)
 
 	// Not localized on purpose
 	Group = Page.AddGroup('DeveloperToolsGroup', "Developer tools");
-	Group.AddCheckBox('ENABLE_TRACE_STARTUP', "Enable trace on startup", "WARNING: Can flood logs with internal info. WILL reveal things that player is not supposed to be aware of", ENABLE_TRACE_STARTUP, ENABLE_TRACE_STARTUP_SaveHandler);
+	ENABLE_TRACE_STARTUP_MCMUI = Group.AddCheckBox('ENABLE_TRACE_STARTUP', "Enable trace on startup", "WARNING: Can flood logs with internal info. WILL reveal things that player is not supposed to be aware of", ENABLE_TRACE_STARTUP, ENABLE_TRACE_STARTUP_SaveHandler);
 
 	Page.ShowSettings();
 }
 
-simulated function LoadSavedSettings ()
+simulated protected function LoadSavedSettings ()
 {
 	REMOVE_NICKNAMED_UPGRADES = `GETMCMVAR(REMOVE_NICKNAMED_UPGRADES);
 	ENABLE_TRACE_STARTUP = `GETMCMVAR(ENABLE_TRACE_STARTUP);
 }
 
-simulated function ResetButtonClicked (MCM_API_SettingsPage Page)
+simulated protected function ResetButtonClicked (MCM_API_SettingsPage Page)
 {
 	`MCM_API_AutoReset(REMOVE_NICKNAMED_UPGRADES);
 	`MCM_API_AutoReset(ENABLE_TRACE_STARTUP);
 }
 
-simulated function SaveButtonClicked (MCM_API_SettingsPage Page)
+simulated protected function SaveButtonClicked (MCM_API_SettingsPage Page)
 {
 	VERSION_CFG = `MCM_CH_GetCompositeVersion();
 	SaveConfig();
