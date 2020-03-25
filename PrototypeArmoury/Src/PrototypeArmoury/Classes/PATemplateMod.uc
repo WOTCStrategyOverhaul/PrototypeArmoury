@@ -59,7 +59,7 @@ static function MakeItemsBuildable ()
 	
 	UIEventListener = PAEventListener_UI(class'XComEngine'.static.GetClassDefaultObject(class'PAEventListener_UI'));
 	ItemTemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
-	`CI_Log("Making items buildable");
+	`PA_Log("Making items buildable");
 
 	foreach default.arrMakeItemBuildable(TemplateName)
 	{
@@ -94,14 +94,14 @@ static function MakeItemsBuildable ()
 				ImageReplacement.ImageSourceItem = ItemTemplate.CreatorTemplateName;
 
 				UIEventListener.ItemAvaliableImageReplacementsAutomatic.AddItem(ImageReplacement);
-				`CI_Trace("Added image replacement for" @ ItemTemplate.DataName);
+				`PA_Trace("Added image replacement for" @ ItemTemplate.DataName);
 			}
 
 			ItemTemplate.CanBeBuilt = true;
 			ItemTemplate.bInfiniteItem = false;
 			ItemTemplate.CreatorTemplateName = '';
 
-			`CI_Trace(ItemTemplate.Name @ "was made single-buildable" @ `showvar(ItemTemplate.Requirements.RequiredTechs.Length));
+			`PA_Trace(ItemTemplate.Name @ "was made single-buildable" @ `showvar(ItemTemplate.Requirements.RequiredTechs.Length));
 		}
 	}
 }
@@ -131,7 +131,7 @@ static function KillItems ()
 	local name TemplateName;
 
 	ItemTemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
-	`CI_Log("Killing items");
+	`PA_Log("Killing items");
 
 	foreach default.arrKillItems(TemplateName)
 	{
@@ -157,7 +157,7 @@ static function KillItems ()
 			ItemTemplate.Cost.ResourceCosts.Length = 0;
 			ItemTemplate.Cost.ArtifactCosts.Length = 0;
 
-			`CI_Trace(ItemTemplate.Name @ "was killed");
+			`PA_Trace(ItemTemplate.Name @ "was killed");
 		}
 	}
 }
@@ -172,7 +172,7 @@ static function OverrideItemCosts ()
 	local int TemplateDifficulty;
 	
 	ItemTemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
-	`CI_Log("Overriding item costs");
+	`PA_Log("Overriding item costs");
 
 	foreach default.arrItemCostOverrides(ItemCostOverrideEntry)
 	{
@@ -187,7 +187,7 @@ static function OverrideItemCosts ()
 		else if (DifficulityVariants.Length == 1 && ItemCostOverrideEntry.Difficulties.Find(3) > -1)
 		{
 			ItemTemplate = X2ItemTemplate(DifficulityVariants[0]);
-			`CI_Trace(ItemTemplate.DataName $ " has had its cost overridden to non-legend values");
+			`PA_Trace(ItemTemplate.DataName $ " has had its cost overridden to non-legend values");
 			ItemTemplate.Cost = ItemCostOverrideEntry.NewCost;
 			continue;
 		}
@@ -219,7 +219,7 @@ static function OverrideItemCosts ()
 			
 			if (ItemCostOverrideEntry.Difficulties.Find(TemplateDifficulty) > -1)
 			{
-				`CI_Trace(ItemTemplate.DataName $ " on difficulty " $ TemplateDifficulty $ " has had its cost overridden");
+				`PA_Trace(ItemTemplate.DataName $ " on difficulty " $ TemplateDifficulty $ " has had its cost overridden");
 				ItemTemplate.Cost = ItemCostOverrideEntry.NewCost;
 			}
 		}

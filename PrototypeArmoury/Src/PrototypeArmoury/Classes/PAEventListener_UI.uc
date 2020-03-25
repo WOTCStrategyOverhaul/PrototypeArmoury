@@ -47,7 +47,7 @@ static function EventListenerReturn OverrideImageForItemAvaliable(Object EventDa
 	i = default.ItemAvaliableImageReplacements.Find('TargetItem', CurrentItemTemplate.DataName);
 	if (i != INDEX_NONE)
 	{
-		`CI_Trace("Replacing image for" @ CurrentItemTemplate.DataName @ "with a manually configured option");
+		`PA_Trace("Replacing image for" @ CurrentItemTemplate.DataName @ "with a manually configured option");
 		Replacement = default.ItemAvaliableImageReplacements[i];
 	}
 
@@ -58,7 +58,7 @@ static function EventListenerReturn OverrideImageForItemAvaliable(Object EventDa
 
 		if (i != INDEX_NONE)
 		{
-			`CI_Trace("Replacing image for" @ CurrentItemTemplate.DataName @ "with an automatically generated option");
+			`PA_Trace("Replacing image for" @ CurrentItemTemplate.DataName @ "with an automatically generated option");
 			Replacement = default.ItemAvaliableImageReplacementsAutomatic[i];
 		}
 	}

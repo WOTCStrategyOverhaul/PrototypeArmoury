@@ -1,0 +1,6 @@
+// Log helpers - required as game doesn't pickup Suppress in Core.System from DLCs/mods
+
+`define PA_Trace(msg) `Log(`msg, !class'X2DownloadableContentInfo_PrototypeArmoury'.default.SuppressTraceLogs, 'PrototypeArmoury_Trace')
+
+`define PA_Log(msg) `Log(`msg,, 'PrototypeArmoury')
+//`define CI_Warn(msg) `Warn(`msg,, 'CI')

@@ -24,6 +24,9 @@
     <Content Include="Config\XComEngine.ini" />
     <Content Include="Config\XComGame.ini" />
     <Content Include="Localization\PrototypeArmoury.int" />
+    <Content Include="Src\extra_globals.uci">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\PrototypeArmoury\Classes\PAEventListener_UI.uc">
       <SubType>Content</SubType>
     </Content>

@@ -1,11 +1,19 @@
 class X2DownloadableContentInfo_PrototypeArmoury extends X2DownloadableContentInfo;
 
+var config(Engine) bool SuppressTraceLogs;
+
+/////////////////
+/// Templates ///
+/////////////////
+
 static function OnPreCreateTemplates ()
 {
-	if (class'UIListener_ModConfigMenu'.default.ENABLE_TRACE_STARTUP)
+	// If we ever add MCM to this mod, bring this option back
+	// But it's not worth adding MCM for one dev option
+	/*if (class'UIListener_ModConfigMenu'.default.ENABLE_TRACE_STARTUP)
 	{
 		GetCDO().SuppressTraceLogs = false;
-	}
+	}*/
 
 	class'PATemplateMod'.static.ForceDifficultyVariants();
 }
@@ -37,4 +45,13 @@ static protected function PatchUIWeaponUpgradeItem ()
 	 // UIArmory_WeaponUpgradeItem doesn't need to process input - the BG does it
 	 // However, if that flag is set then we don't get mouse events for children
 	 // which breaks the "drop item" button
+}
+
+////////////////
+/// Commands ///
+////////////////
+
+exec function EnableTrace_PrototypeArmoury (optional bool Enabled = true)
+{
+	SuppressTraceLogs = !Enabled;
 }
