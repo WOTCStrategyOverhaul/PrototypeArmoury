@@ -1,4 +1,4 @@
-class PATemplateMod extends Object abstract;
+class PATemplateMod extends Object abstract config(PrototypeArmoury);
 
 struct TradingPostValueModifier
 {
@@ -37,7 +37,7 @@ static function ForceDifficultyVariants ()
 
 		if (DataSetCDO == none)
 		{
-			`CI_Warn(DataSetToPatch @ "is not a valid X2DataSet class");
+			`PA_WarnNoStack(DataSetToPatch @ "is not a valid X2DataSet class");
 		}
 		else
 		{
@@ -72,7 +72,7 @@ static function MakeItemsBuildable ()
 
 			if (ItemTemplate == none)
 			{
-				`CI_Warn(DataTemplate.Name @ "is not an X2ItemTemplate");
+				`PA_WarnNoStack(DataTemplate.Name @ "is not an X2ItemTemplate");
 				continue;
 			}
 
@@ -144,7 +144,7 @@ static function KillItems ()
 
 			if (ItemTemplate == none)
 			{
-				`CI_Warn(DataTemplate.Name @ "is not an X2ItemTemplate");
+				`PA_WarnNoStack(DataTemplate.Name @ "is not an X2ItemTemplate");
 				continue;
 			}
 
@@ -181,7 +181,7 @@ static function OverrideItemCosts ()
 		
 		if (DifficulityVariants.Length == 0)
 		{
-			`CI_Warn(ItemCostOverrideEntry.ItemName @ "is not an X2ItemTemplate, cannot override cost");
+			`PA_WarnNoStack(ItemCostOverrideEntry.ItemName @ "is not an X2ItemTemplate, cannot override cost");
 			continue;
 		}
 		else if (DifficulityVariants.Length == 1 && ItemCostOverrideEntry.Difficulties.Find(3) > -1)

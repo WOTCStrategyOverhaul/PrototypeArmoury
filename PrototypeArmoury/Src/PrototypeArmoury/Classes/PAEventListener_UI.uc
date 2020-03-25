@@ -82,7 +82,7 @@ static function EventListenerReturn OverrideImageForItemAvaliable(Object EventDa
 			}
 			else
 			{
-				`CI_Warn(CurrentItemTemplate.DataName @ "has a replacement with image from" @ Replacement.ImageSourceItem @ "but the latter has no image or doesn't exist");
+				`PA_Warn(CurrentItemTemplate.DataName @ "has a replacement with image from" @ Replacement.ImageSourceItem @ "but the latter has no image or doesn't exist");
 			}
 		}
 	}
