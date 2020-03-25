@@ -33,7 +33,7 @@
     <Content Include="Src\PrototypeArmoury\Classes\PAHelpers.uc">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="Src\PrototypeArmoury\Classes\PATemplateMod.uc">
+    <Content Include="Src\PrototypeArmoury\Classes\PATemplateMods.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\PrototypeArmoury\Classes\PA_DataStructures.uc">

@@ -15,23 +15,25 @@ static function OnPreCreateTemplates ()
 		GetCDO().SuppressTraceLogs = false;
 	}*/
 
-	class'PATemplateMod'.static.ForceDifficultyVariants();
+	class'PATemplateMods'.static.ForceDifficultyVariants();
 }
 
 static event OnPostTemplatesCreated ()
 {
-	class'PATemplateMod'.static.MakeItemsBuildable();
-	class'PATemplateMod'.static.ApplyTradingPostModifiers();
-	class'PATemplateMod'.static.KillItems();
-	class'PATemplateMod'.static.OverrideItemCosts();
+	class'PATemplateMods'.static.MakeItemsBuildable();
+	class'PATemplateMods'.static.ApplyTradingPostModifiers();
+	class'PATemplateMods'.static.KillItems();
+	class'PATemplateMods'.static.OverrideItemCosts();
 
-	class'PATemplateMod'.static.PatchTLPArmorsets();
-	class'PATemplateMod'.static.PatchTLPWeapons();
+	class'PATemplateMods'.static.PatchTLPArmorsets();
+	class'PATemplateMods'.static.PatchTLPWeapons();
 	
-	class'PATemplateMod'.static.DisableLockAndLoadBreakthrough();
-	class'PATemplateMod'.static.PatchWeaponTechs();
+	class'PATemplateMods'.static.DisableLockAndLoadBreakthrough();
+	class'PATemplateMods'.static.PatchWeaponTechs();
 
 	// TODO: Remove the LockAndLoad card
+	// TODO: Config for optional disable of always l&l
+	// TODO: UI for weapon upgrade removal
 
 	// These aren't actually template changes, but's this is still a convenient place to do it - before the game fully loads
 	PatchUIWeaponUpgradeItem();

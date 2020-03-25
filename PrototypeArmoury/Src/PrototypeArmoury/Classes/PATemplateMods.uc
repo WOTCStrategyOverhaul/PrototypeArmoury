@@ -1,4 +1,4 @@
-class PATemplateMod extends Object abstract config(PrototypeArmoury);
+class PATemplateMods extends Object abstract config(PrototypeArmoury);
 
 struct TradingPostValueModifier
 {
