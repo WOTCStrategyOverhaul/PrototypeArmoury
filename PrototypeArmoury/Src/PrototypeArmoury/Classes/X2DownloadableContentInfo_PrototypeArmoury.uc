@@ -31,6 +31,8 @@ static event OnPostTemplatesCreated ()
 	class'PATemplateMod'.static.DisableLockAndLoadBreakthrough();
 	class'PATemplateMod'.static.PatchWeaponTechs();
 
+	// TODO: Remove the LockAndLoad card
+
 	// These aren't actually template changes, but's this is still a convenient place to do it - before the game fully loads
 	PatchUIWeaponUpgradeItem();
 }
@@ -45,6 +47,40 @@ static protected function PatchUIWeaponUpgradeItem ()
 	 // UIArmory_WeaponUpgradeItem doesn't need to process input - the BG does it
 	 // However, if that flag is set then we don't get mouse events for children
 	 // which breaks the "drop item" button
+}
+
+///////////////////////
+/// Loaded/new game ///
+///////////////////////
+
+static event InstallNewCampaign (XComGameState StartState)
+{
+	ForceLockAndLoad(StartState);
+}
+
+static event OnLoadedSavedGame ()
+{
+	ForceLockAndLoad(none);
+}
+
+static protected function ForceLockAndLoad (XComGameState NewGameState)
+{
+	local XComGameState_HeadquartersXCom XComHQ;
+	local bool bSubmitLocally;
+
+	if (NewGameState == none)
+	{
+		bSubmitLocally = true;
+		NewGameState = class'XComGameStateContext_ChangeContainer'.static.CreateChangeState("PA: Forcing Lock And Load");
+	}
+
+	XComHQ = XComGameState_HeadquartersXCom(NewGameState.ModifyStateObject(class'XComGameState_HeadquartersXCom', `XCOMHQ.ObjectID));
+	XComHQ.bReuseUpgrades = true;
+
+	if(bSubmitLocally)
+	{
+		`XCOMGAME.GameRuleset.SubmitGameState(NewGameState);
+	}
 }
 
 ////////////////
