@@ -1,5 +1,3 @@
-// TODO: X2EventListener_Infiltration::TriggerPrototypeAlert
-
 class X2DownloadableContentInfo_PrototypeArmoury extends X2DownloadableContentInfo;
 
 `include(PrototypeArmoury\Src\ModConfigMenuAPI\MCM_API_CfgHelpers.uci)
@@ -35,7 +33,6 @@ static event OnPostTemplatesCreated ()
 
 	// TODO: Remove the LockAndLoad card
 	// TODO: Config for optional disable of always l&l
-	// TODO: UI for weapon upgrade removal
 
 	// These aren't actually template changes, but's this is still a convenient place to do it - before the game fully loads
 	PatchUIWeaponUpgradeItem();
