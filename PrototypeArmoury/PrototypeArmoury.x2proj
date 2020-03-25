@@ -74,6 +74,9 @@
     <Content Include="Src\ModConfigMenuAPI\MCM_API_Includes.uci">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\PrototypeArmoury\Classes\PAEventListener.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\PrototypeArmoury\Classes\PAEventListener_UI.uc">
       <SubType>Content</SubType>
     </Content>
