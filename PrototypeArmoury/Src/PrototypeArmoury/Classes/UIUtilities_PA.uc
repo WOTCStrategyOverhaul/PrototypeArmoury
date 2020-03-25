@@ -1,5 +1,7 @@
 class UIUtilities_PA extends Object;
 
+`include(PrototypeArmoury\Src\ModConfigMenuAPI\MCM_API_CfgHelpers.uci)
+
 var localized string strDropUpgrade;
 
 var localized string strStripUpgrades;
@@ -69,7 +71,7 @@ static function OnStripWeaponUpgrades ()
 
 	kTag = XGParamTag(`XEXPANDCONTEXT.FindTag("XGParam"));
 
-	if (`MCM_CH_GetValueStatic(class'ModConfigMenu_Defaults'.default.REMOVE_NICKNAMED_UPGRADES_DEFAULT, class'UIListener_ModConfigMenu'.default.REMOVE_NICKNAMED_UPGRADES))
+	if (`GETMCMVAR(REMOVE_NICKNAMED_UPGRADES))
 	{
 		kTag.StrValue0 = class'UIUtilities_Text'.static.GetColoredText("REMOVED", eUIState_Bad); // TODO: Loc
 	}
@@ -178,11 +180,7 @@ static function OnStripUpgradesDialogCallback (Name eAction)
 
 static protected function bool ShouldRemoveNicknamedUpgrades (XComGameState_Item ItemState)
 {
-	local bool RemoveNicknamedUpgrades;
-
-	RemoveNicknamedUpgrades = `MCM_CH_GetValueStatic(class'ModConfigMenu_Defaults'.default.REMOVE_NICKNAMED_UPGRADES_DEFAULT, class'UIListener_ModConfigMenu'.default.REMOVE_NICKNAMED_UPGRADES);
-
-	if (RemoveNicknamedUpgrades)
+	if (`GETMCMVAR(REMOVE_NICKNAMED_UPGRADES))
 	{
 		return true;
 	}

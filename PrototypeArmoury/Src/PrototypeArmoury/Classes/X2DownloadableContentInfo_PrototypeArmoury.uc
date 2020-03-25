@@ -2,6 +2,8 @@
 
 class X2DownloadableContentInfo_PrototypeArmoury extends X2DownloadableContentInfo;
 
+`include(PrototypeArmoury\Src\ModConfigMenuAPI\MCM_API_CfgHelpers.uci)
+
 var config(Engine) bool SuppressTraceLogs;
 
 /////////////////
@@ -10,12 +12,10 @@ var config(Engine) bool SuppressTraceLogs;
 
 static function OnPreCreateTemplates ()
 {
-	// If we ever add MCM to this mod, bring this option back
-	// But it's not worth adding MCM for one dev option
-	/*if (class'UIListener_ModConfigMenu'.default.ENABLE_TRACE_STARTUP)
+	if (`GETMCMVAR(ENABLE_TRACE_STARTUP))
 	{
 		GetCDO().SuppressTraceLogs = false;
-	}*/
+	}
 
 	class'PATemplateMods'.static.ForceDifficultyVariants();
 }
@@ -94,4 +94,13 @@ static protected function ForceLockAndLoad (XComGameState NewGameState)
 exec function EnableTrace_PrototypeArmoury (optional bool Enabled = true)
 {
 	SuppressTraceLogs = !Enabled;
+}
+
+///////////////
+/// Helpers ///
+///////////////
+
+static function X2DownloadableContentInfo_PrototypeArmoury GetCDO ()
+{
+	return X2DownloadableContentInfo_PrototypeArmoury(class'XComEngine'.static.GetClassDefaultObjectByName(default.Class.Name));
 }
