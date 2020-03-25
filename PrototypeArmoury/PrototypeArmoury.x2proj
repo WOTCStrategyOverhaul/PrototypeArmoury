@@ -39,6 +39,18 @@
     <Content Include="Src\PrototypeArmoury\Classes\PA_DataStructures.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\PrototypeArmoury\Classes\UIDropWeaponUpgradeButton.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\PrototypeArmoury\Classes\UIListener_SSManageEquipment.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\PrototypeArmoury\Classes\UIListener_WeaponUpgrade.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\PrototypeArmoury\Classes\UIUtilities_PA.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\PrototypeArmoury\Classes\X2DownloadableContentInfo_PrototypeArmoury.uc" />
   </ItemGroup>
   <!-- The weird stuff below (until Target) is required or otherwise ModBuddy project breaks ¯\_(ツ)_/¯ P.S. Also don't try to make it more sane -->

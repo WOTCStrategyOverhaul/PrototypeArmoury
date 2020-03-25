@@ -6,3 +6,7 @@
 
 `define PA_Warn(msg, bLog, bRedScreen) class'PAHelpers'.static.LogWarn(`msg, true, `bLog, `bRedScreen)
 `define PA_WarnNoStack(msg, bLog, bRedScreen) class'PAHelpers'.static.LogWarn(`msg, false, `bLog, `bRedScreen)
+
+// Easy consts
+
+`define PA_DEFAULT_EVENT_PRIORITY class'PA_DataStructures'.const.DEFAULT_EVENT_PRIORITY

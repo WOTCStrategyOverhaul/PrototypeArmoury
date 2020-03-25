@@ -1,3 +1,5 @@
+// TODO: X2EventListener_Infiltration::TriggerPrototypeAlert
+
 class X2DownloadableContentInfo_PrototypeArmoury extends X2DownloadableContentInfo;
 
 var config(Engine) bool SuppressTraceLogs;
@@ -62,7 +64,7 @@ static event InstallNewCampaign (XComGameState StartState)
 
 static event OnLoadedSavedGame ()
 {
-	ForceLockAndLoad(none);
+	ForceLockAndLoad(none); // TODO: Add a check for XComHQ.bReuseUpgrades != true and call this from OnLoadToStrategy and OnPostExitMissionSequence
 }
 
 static protected function ForceLockAndLoad (XComGameState NewGameState)
