@@ -14,6 +14,9 @@ event OnInit (UIScreen Screen)
 	WeaponUpgradeScreen = UIArmory_WeaponUpgrade(Screen);
 	if (WeaponUpgradeScreen == none) return;
 
+	// Only if we can reuse upgrades
+	if (!`XCOMHQ.bReuseUpgrades) return;
+
 	WeaponUpgradeScreen.Movie.Stack.SubscribeToOnInputForScreen(WeaponUpgradeScreen, OnUnrealCommand);
 }
 

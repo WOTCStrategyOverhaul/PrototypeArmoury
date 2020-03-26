@@ -114,6 +114,9 @@ static protected function EventListenerReturn WeaponUpgrade_SlotsUpdated (Object
 	local UIList SlotsList;
 	local UIPanel Panel;
 
+	// Only if we can reuse upgrades
+	if (!`XCOMHQ.bReuseUpgrades) return ELR_NoInterrupt;
+
 	if (`ISCONTROLLERACTIVE)
 	{
 		// We add the button only if using mouse
@@ -143,6 +146,9 @@ static protected function EventListenerReturn WeaponUpgrade_NavHelpUpdated (Obje
 {
 	local UIArmory_WeaponUpgrade Screen;
 	local UINavigationHelp NavHelp;
+
+	// Only if we can reuse upgrades
+	if (!`XCOMHQ.bReuseUpgrades) return ELR_NoInterrupt;
 
 	if (!`ISCONTROLLERACTIVE)
 	{

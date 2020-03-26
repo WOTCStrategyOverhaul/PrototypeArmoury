@@ -28,11 +28,12 @@ static event OnPostTemplatesCreated ()
 	class'PATemplateMods'.static.PatchTLPArmorsets();
 	class'PATemplateMods'.static.PatchTLPWeapons();
 	
-	class'PATemplateMods'.static.DisableLockAndLoadBreakthrough();
 	class'PATemplateMods'.static.PatchWeaponTechs();
 
-	// TODO: Remove the LockAndLoad card
-	// TODO: Config for optional disable of always l&l
+	if (`GETMCMVAR(FORCE_LOCK_AND_LOAD))
+	{
+		class'PATemplateMods'.static.DisableLockAndLoadBreakthrough();
+	}
 
 	// These aren't actually template changes, but's this is still a convenient place to do it - before the game fully loads
 	PatchUIWeaponUpgradeItem();
@@ -56,12 +57,18 @@ static protected function PatchUIWeaponUpgradeItem ()
 
 static event InstallNewCampaign (XComGameState StartState)
 {
-	ForceLockAndLoad(StartState);
+	if (`GETMCMVAR(FORCE_LOCK_AND_LOAD))
+	{
+		ForceLockAndLoad(StartState);
+	}
 }
 
 static event OnLoadedSavedGame ()
 {
-	ForceLockAndLoad(none); // TODO: Add a check for XComHQ.bReuseUpgrades != true and call this from OnLoadToStrategy and OnPostExitMissionSequence
+	if (`GETMCMVAR(FORCE_LOCK_AND_LOAD))
+	{
+		ForceLockAndLoad(none);
+	}
 }
 
 static protected function ForceLockAndLoad (XComGameState NewGameState)

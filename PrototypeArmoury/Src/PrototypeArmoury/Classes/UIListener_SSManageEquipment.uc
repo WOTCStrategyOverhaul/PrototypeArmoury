@@ -17,6 +17,9 @@ event OnInit (UIScreen Screen)
 	ManageEquipment = UIManageEquipmentMenu(Screen);
 	if (ManageEquipment == none) return;
 
+	// Only if we can reuse upgrades
+	if (!`XCOMHQ.bReuseUpgrades) return;
+
 	ScreenStack = Screen.Movie.Stack;
 	SecondScreen = ScreenStack.Screens[2]; // 0 is UIManageEquipmentMenu, 1 is mouse guard and 2 should be UISquadSelect
 

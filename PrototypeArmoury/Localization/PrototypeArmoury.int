@@ -2,9 +2,13 @@
 ModName=Prototype Armoury
 PageTitle=Prototype Armoury
 
-MiscTitle=Various Settings
+CanBeChangedInSaveTitle=Can be changed during a campaign
 REMOVE_NICKNAMED_UPGRADES_Label=Remove upgrades from nicknamed items
 REMOVE_NICKNAMED_UPGRADES_Tip="Disabling this will preserve any nicknamed weapon's upgrades when selecting 'MAKE UPGRADES AVAILABLE' at the squad select screen"
+
+CanNotBeChangedInSaveTitle=Can NOT be changed during a campaign
+FORCE_LOCK_AND_LOAD_Label=Always enable Lock And Load
+FORCE_LOCK_AND_LOAD_Tip=Allows to always replace weapon upgrades without destroying the previous one. Requires game restart to apply
 
 [UIUtilities_PA]
 strDropUpgrade=REMOVE UPGRADE
