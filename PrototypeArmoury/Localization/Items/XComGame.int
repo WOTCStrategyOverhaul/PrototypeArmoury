@@ -1,0 +1,26 @@
+[TLE_KevlarArmor X2ArmorTemplate]
+FriendlyName="Scavenged Field Armor"
+FriendlyNamePlural="Scavenged Field Armor"
+BriefSummary="This basic armor consists of improvised protection cobbled together from salvage and Resistance arms caches. It provides minimal protection against ADVENT and alien weaponry."
+TacticalText="<Bullet/> All soldiers receive Kevlar Armor as part of their basic kit.\n<Bullet/> Research can give us access to better armor."
+
+[TLE_PlatedArmor X2ArmorTemplate]
+FriendlyName="Prototype Field Plate"
+FriendlyNamePlural="Prototype Field Plate"
+BriefSummary="Using scavenged plates of ADVENT armor, this suit provides increased protection and additional inventory capacity for our soldiers."
+TacticalText="<Bullet/> Mid-weight armor based on ADVENT salvage.\n<Bullet/> As a medium-class armor, it provides a slot for one additional inventory item."
+
+[TLE_PoweredArmor X2ArmorTemplate]
+FriendlyName="Experimental Power Armor"
+FriendlyNamePlural="Experimental Power Armor"
+BriefSummary="Our new mastery of the alien's Elerium technology has lead us to the ultimate in battle armor. Elerium powered armor provides unprecedented survivability and versatility in the battle against increasingly powerful alien enemies."
+TacticalText="<Bullet/> Top tier medium-class armor available.\n<Bullet/> Power Armor has 2 inventory item slots."
+
+[SparkBit_CV X2GremlinTemplate]
+BriefSummary="The BIT is a variation on our GREMLIN drone, with the medikit and electroshock subsystems replaced with a heavy weapons mount."
+
+[SparkBit_MG X2GremlinTemplate]
+BriefSummary="The addition of alien alloys to the BIT design allows us to miniaturize the launcher and make room for additional electronic warfare modules."
+
+[SparkBit_BM X2GremlinTemplate]
+BriefSummary="Elerium powercells have particular utility when applied to our drone designs, drastically increasing power output and cyberwarfare capabilities."
