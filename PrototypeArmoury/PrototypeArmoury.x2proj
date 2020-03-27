@@ -32,6 +32,9 @@
     <Content Include="Config\CAs\XComGameCore.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Config\Items\XComContent.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Config\Items\XComStrategyTuning.ini">
       <SubType>Content</SubType>
     </Content>
@@ -144,6 +147,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\PrototypeArmoury\Classes\X2DownloadableContentInfo_PrototypeArmoury.uc" />
+    <Content Include="Src\PrototypeArmoury\Classes\X2Item_PA_TLEArmors.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\PrototypeArmoury\Classes\X2StrategyElement_PAActions.uc">
       <SubType>Content</SubType>
     </Content>
