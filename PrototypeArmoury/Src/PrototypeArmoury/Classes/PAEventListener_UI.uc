@@ -12,6 +12,7 @@ static function array<X2DataTemplate> CreateTemplates ()
 
 	Templates.AddItem(CreateAlertListeners());
 	Templates.AddItem(CreateArmoryListeners());
+	Templates.AddItem(CreateSquadSelectListeners());
 
 	return Templates;
 }
@@ -175,6 +176,41 @@ static protected function EventListenerReturn WeaponUpgrade_NavHelpUpdated (Obje
 	{
 		NavHelp.AddLeftHelp(class'UIUtilities_PA'.default.strDropUpgrade, class'UIUtilities_Input'.const.ICON_X_SQUARE);
 	}
+
+	return ELR_NoInterrupt;
+}
+
+////////////////////
+/// Squad Select ///
+////////////////////
+
+static function CHEventListenerTemplate CreateSquadSelectListeners ()
+{
+	local CHEventListenerTemplate Template;
+
+	`CREATE_X2TEMPLATE(class'CHEventListenerTemplate', Template, 'PrototypeArmoury_UI_SquadSelect');
+	Template.AddCHEvent('UISquadSelect_NavHelpUpdate', SSNavHelpUpdate, ELD_Immediate, `PA_DEFAULT_EVENT_PRIORITY);
+	Template.RegisterInStrategy = true;
+
+	return Template;
+}
+
+static protected function EventListenerReturn SSNavHelpUpdate (Object EventData, Object EventSource, XComGameState GameState, Name EventID, Object CallbackData)
+{
+	local UINavigationHelp NavHelp;
+
+	if (`ISCONTROLLERACTIVE)
+	{
+		// We add the button only if using mouse
+		return ELR_NoInterrupt;
+	}
+
+	NavHelp = UINavigationHelp(EventData);
+	NavHelp.AddCenterHelp(
+		class'UIUtilities_PA'.default.strStripUpgrades,,
+		class'UIUtilities_PA'.static.OnStripWeaponUpgrades,,
+		class'UIUtilities_PA'.default.strStripUpgradesTooltip
+	);
 
 	return ELR_NoInterrupt;
 }
