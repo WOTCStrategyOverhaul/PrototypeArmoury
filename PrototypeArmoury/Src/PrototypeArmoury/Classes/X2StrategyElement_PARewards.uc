@@ -11,9 +11,6 @@ static function array<X2DataTemplate> CreateTemplates()
 	Rewards.AddItem(CreateLootTableRewardTemplate('Reward_SidegradeT2', 'SidegradeT2'));
 	Rewards.AddItem(CreateLootTableRewardTemplate('Reward_SidegradeT3', 'SidegradeT3'));
 
-	// CA rewards
-	Rewards.AddItem(CreateLootTableRewardTemplate('Reward_ExperimentalItem', 'ExperimentalItem'));
-
 	return Rewards;
 }
 

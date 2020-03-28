@@ -11,12 +11,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Config\" />
-    <Folder Include="Config\CAs" />
     <Folder Include="Config\Items" />
     <Folder Include="Config\POIs" />
     <Folder Include="Content\" />
     <Folder Include="Localization\" />
-    <Folder Include="Localization\CAs" />
     <Folder Include="Localization\Items" />
     <Folder Include="Localization\POIs" />
     <Folder Include="Src\" />
@@ -26,12 +24,6 @@
     <Folder Include="Src\PrototypeArmoury\Classes\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\CAs\XComGameBoard.ini">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Config\CAs\XComGameCore.ini">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="Config\Items\XComContent.ini">
       <SubType>Content</SubType>
     </Content>
@@ -48,9 +40,6 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Config\XComPrototypeArmoury_DEFAULT.ini">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Localization\CAs\XComGame.int">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Localization\Items\XComGame.int">
@@ -148,9 +137,6 @@
     </Content>
     <Content Include="Src\PrototypeArmoury\Classes\X2DownloadableContentInfo_PrototypeArmoury.uc" />
     <Content Include="Src\PrototypeArmoury\Classes\X2Item_PA_TLEArmors.uc">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Src\PrototypeArmoury\Classes\X2StrategyElement_PAActions.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\PrototypeArmoury\Classes\X2StrategyElement_PAPointsOfInterest.uc">
