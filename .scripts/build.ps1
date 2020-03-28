@@ -162,7 +162,7 @@ if (Test-Path "$stagingPath\$modNameCanonical.x2proj") {
 }
 
 Write-Host "Converting the localization file enconding";
-Get-ChildItem "$stagingPath\Localization" | 
+Get-ChildItem "$stagingPath\Localization" -Recurse -File | 
 Foreach-Object {
 	$content = Get-Content $_.FullName
 	$content | Out-File $_.FullName -Encoding Unicode
