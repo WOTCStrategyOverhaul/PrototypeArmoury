@@ -1,10 +1,15 @@
 class PATemplateMods extends Object abstract config(StrategyTuning);
 
 var config array<ItemFromDLC> arrDataSetsToForceVariants;
-
 var config array<ItemFromDLC> arrMakeItemBuildable;
 var config array<ItemFromDLC> arrKillItems;
 var config array<TradingPostValueModifier> arrTradingPostModifiers;
+
+var config(StrategyTuning) float GlobalCostMult;
+
+var config(StrategyTuning) bool PrototypePrimaries;
+var config(StrategyTuning) bool PrototypeSecondaries;
+var config(StrategyTuning) bool PrototypeArmorsets;
 
 var config array<name> arrPrototypesToDisable;
 var config bool PrototypePrimaries;
@@ -102,6 +107,16 @@ static function MakeItemBuildable (name TemplateName, X2ItemTemplateManager Item
 		ItemTemplate.CanBeBuilt = true;
 		ItemTemplate.bInfiniteItem = false;
 		ItemTemplate.CreatorTemplateName = '';
+		
+		for (i = 0; i < ItemTemplate.Cost.ResourceCosts.Length; i++)
+		{
+			ItemTemplate.Cost.ResourceCosts[i].Quantity = ItemTemplate.Cost.ResourceCosts[i].Quantity * default.GlobalCostMult;
+		}
+
+		for (i = 0; i < ItemTemplate.Cost.ArtifactCosts.Length; i++)
+		{
+			ItemTemplate.Cost.ArtifactCosts[i].Quantity = ItemTemplate.Cost.ArtifactCosts[i].Quantity * default.GlobalCostMult;
+		}
 
 		`PA_Trace(ItemTemplate.Name @ "was made single-buildable" @ `showvar(ItemTemplate.Requirements.RequiredTechs.Length));
 	}
@@ -268,7 +283,7 @@ static function OverrideItemCosts ()
 	local X2DataTemplate DataTemplate;
 	local X2ItemTemplate ItemTemplate;
 	local ItemCostOverride ItemCostOverrideEntry;
-	local int TemplateDifficulty;
+	local int TemplateDifficulty, i;
 	
 	ItemTemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
 	`PA_Log("Overriding item costs");
@@ -291,6 +306,17 @@ static function OverrideItemCosts ()
 			ItemTemplate = X2ItemTemplate(DifficultyVariants[0]);
 			`PA_Trace(ItemTemplate.DataName $ " has had its cost overridden to non-legend values");
 			ItemTemplate.Cost = ItemCostOverrideEntry.NewCost;
+			
+			for (i = 0; i < ItemTemplate.Cost.ResourceCosts.Length; i++)
+			{
+				ItemTemplate.Cost.ResourceCosts[i].Quantity = ItemTemplate.Cost.ResourceCosts[i].Quantity * default.GlobalCostMult;
+			}
+
+			for (i = 0; i < ItemTemplate.Cost.ArtifactCosts.Length; i++)
+			{
+				ItemTemplate.Cost.ArtifactCosts[i].Quantity = ItemTemplate.Cost.ArtifactCosts[i].Quantity * default.GlobalCostMult;
+			}
+
 			continue;
 		}
 
@@ -323,6 +349,16 @@ static function OverrideItemCosts ()
 			{
 				`PA_Trace(ItemTemplate.DataName $ " on difficulty " $ TemplateDifficulty $ " has had its cost overridden");
 				ItemTemplate.Cost = ItemCostOverrideEntry.NewCost;
+				
+				for (i = 0; i < ItemTemplate.Cost.ResourceCosts.Length; i++)
+				{
+					ItemTemplate.Cost.ResourceCosts[i].Quantity = ItemTemplate.Cost.ResourceCosts[i].Quantity * default.GlobalCostMult;
+				}
+
+				for (i = 0; i < ItemTemplate.Cost.ArtifactCosts.Length; i++)
+				{
+					ItemTemplate.Cost.ArtifactCosts[i].Quantity = ItemTemplate.Cost.ArtifactCosts[i].Quantity * default.GlobalCostMult;
+				}
 			}
 		}
 	}
