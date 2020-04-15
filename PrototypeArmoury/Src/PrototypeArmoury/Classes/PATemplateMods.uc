@@ -6,7 +6,7 @@ var config array<ItemFromDLC> arrKillItems;
 var config array<TradingPostValueModifier> arrTradingPostModifiers;
 
 var config(StrategyTuning) array<StrategyCostScalar> ResourceCostScalars;
-var config(StrategyTuning) float ArtifactCostMultiplier;
+var config(StrategyTuning) array<float> ArtifactCostMultiplier;
 
 var config(StrategyTuning) bool PrototypePrimaries;
 var config(StrategyTuning) bool PrototypeSecondaries;
@@ -56,7 +56,7 @@ static function MakeItemsBuildable ()
 
 	UIEventListener = PAEventListener_UI(class'XComEngine'.static.GetClassDefaultObject(class'PAEventListener_UI'));
 	ItemTemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
-	`PA_Log("Making items buildable");
+	`PA_Log("Making" @ default.arrMakeItemBuildable.Length @ "items buildable");
 
 	foreach default.arrMakeItemBuildable(TemplateItem)
 	{
@@ -76,8 +76,10 @@ static function MakeItemBuildable (name TemplateName, X2ItemTemplateManager Item
 	local X2ItemTemplate ItemTemplate;
 
 	ItemTemplateManager.FindDataTemplateAllDifficulties(TemplateName, DifficultyVariants);
+	
+	`PA_Trace("Evaluating" @ TemplateName);
 
-	foreach DifficultyVariants(DataTemplate)
+	foreach DifficulityVariants(DataTemplate)
 	{
 		ItemTemplate = X2ItemTemplate(DataTemplate);
 
@@ -279,8 +281,7 @@ static function OverrideItemCosts ()
 	local X2DataTemplate DataTemplate;
 	local X2ItemTemplate ItemTemplate;
 	local ItemCostOverride ItemCostOverrideEntry;
-	local StrategyCostScalar CostScalar;
-	local int TemplateDifficulty, i;
+	local int TemplateDifficulty;
 
 	if (!default.EnableUtilityItemOverrides) return;
 	
@@ -349,7 +350,8 @@ static function OverrideItemCosts ()
 
 static function AdjustItemCost (X2ItemTemplate ItemTemplate)
 {
-	local int TemplateDifficulty;
+	local StrategyCostScalar CostScalar;
+	local int TemplateDifficulty, i;
 
 	if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Rookie))
 	{
@@ -370,18 +372,18 @@ static function AdjustItemCost (X2ItemTemplate ItemTemplate)
 	else
 	{
 		TemplateDifficulty = -1; // Untranslatable Bitfield
-		`PA_Log("Cannot adjust cost - invalid difficulty");
+		`PA_Trace("Cannot adjust cost - invalid difficulty");
 		return;
 	}
 	
-	`PA_Log("Adjusting item cost of " $ ItemTemplate.DataName $ " on difficulty " $ TemplateDifficulty);
+	`PA_Trace("Adjusting item cost of " $ ItemTemplate.DataName $ " on difficulty " $ TemplateDifficulty);
 	for (i = 0; i < ItemTemplate.Cost.ResourceCosts.Length; i++)
 	{
 		foreach default.ResourceCostScalars(CostScalar)
 		{
 			if (ItemTemplate.Cost.ResourceCosts[i].ItemTemplateName == CostScalar.ItemTemplateName && TemplateDifficulty == CostScalar.Difficulty)
 			{
-				`PA_Log("--> " $ CostScalar.ItemTemplateName $ ": " $ CostScalar.Scalar);
+				`PA_Trace("--> " $ CostScalar.ItemTemplateName $ ": " $ CostScalar.Scalar);
 				ItemTemplate.Cost.ResourceCosts[i].Quantity = Round(ItemTemplate.Cost.ResourceCosts[i].Quantity * CostScalar.Scalar);
 			}
 		}
@@ -389,8 +391,8 @@ static function AdjustItemCost (X2ItemTemplate ItemTemplate)
 
 	for (i = 0; i < ItemTemplate.Cost.ArtifactCosts.Length; i++)
 	{
-		`PA_Log("--> " $ ItemTemplate.Cost.ArtifactCosts[i].ItemTemplateName $ ": " $ `ScaleStrategyArrayInt(default.ArtifactCostMultiplier));
-		ItemTemplate.Cost.ArtifactCosts[i].Quantity = ItemTemplate.Cost.ArtifactCosts[i].Quantity * `ScaleStrategyArrayInt(default.ArtifactCostMultiplier);
+		`PA_Trace("--> " $ ItemTemplate.Cost.ArtifactCosts[i].ItemTemplateName $ ": " $ `ScaleStrategyArrayFloat(default.ArtifactCostMultiplier));
+		ItemTemplate.Cost.ArtifactCosts[i].Quantity = ItemTemplate.Cost.ArtifactCosts[i].Quantity * `ScaleStrategyArrayFloat(default.ArtifactCostMultiplier);
 	}
 }
 
