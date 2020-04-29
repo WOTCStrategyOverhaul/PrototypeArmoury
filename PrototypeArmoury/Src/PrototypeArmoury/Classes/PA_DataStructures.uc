@@ -12,3 +12,25 @@ struct ItemAvaliableImageReplacement
 	// Pull image from template
 	var name ImageSourceItem;
 };
+
+struct TradingPostValueModifier
+{
+	var name ItemName;
+	var int NewValue;
+};
+
+struct ItemCostOverride
+{
+	var name ItemName;
+	var array<int> Difficulties;
+	var StrategyCost NewCost;
+};
+
+struct AutoItemConversion
+{
+	var name ItemName;
+	var int Supplies;
+	var int Alloys;
+	var int Elerium;
+};
+
