@@ -192,8 +192,8 @@ static function AutoConvertItems ()
 			continue;
 		}
 
-		CopyItemRequirements(TemplateName, ItemTemplateManager);
-		KillItemSchematic(TemplateName, ItemTemplateManager);
+		CopyItemRequirements(ItemTemplate, ItemTemplateManager);
+		KillItem(ItemTemplate.CreatorTemplateName, ItemTemplateManager);
 		MakeItemBuildable(TemplateName, ItemTemplateManager, UIEventListener);
 
 		ItemTemplate.TradingPostValue = int(default.AutoBlackMarketPriceMult * ConversionEntry.Supplies);
@@ -224,40 +224,23 @@ static function AutoConvertItems ()
 	}
 }
 
-static function KillItemSchematic (name TemplateName, X2ItemTemplateManager ItemTemplateManager)
-{
-	local X2ItemTemplate ItemTemplate;
-
-	ItemTemplate = ItemTemplateManager.FindItemTemplate(TemplateName);
-
-	if (ItemTemplate == none)
-	{
-		`PA_WarnNoStack(TemplateName @ "is not an X2ItemTemplate");
-		return;
-	}
-
-	KillItem(ItemTemplate.CreatorTemplateName, ItemTemplateManager);
-}
-
-static function CopyItemRequirements (name TemplateName, X2ItemTemplateManager ItemTemplateManager)
+static function CopyItemRequirements (X2ItemTemplate ItemTemplate, X2ItemTemplateManager ItemTemplateManager)
 {
 	local array<X2DataTemplate> DifficultyVariants;
 	local X2DataTemplate DataTemplate;
-	local X2ItemTemplate ItemTemplate, SchematicTemplate;
+	local X2ItemTemplate SchematicTemplate;
 	
-	ItemTemplateManager.FindDataTemplateAllDifficulties(TemplateName, DifficultyVariants);
+	ItemTemplateManager.FindDataTemplateAllDifficulties(ItemTemplate.CreatorTemplateName, DifficultyVariants);
 
 	foreach DifficultyVariants(DataTemplate)
 	{
-		ItemTemplate = X2ItemTemplate(DataTemplate);
+		SchematicTemplate = X2ItemTemplate(DataTemplate);
 
-		if (ItemTemplate == none)
+		if (SchematicTemplate == none)
 		{
 			`PA_WarnNoStack(DataTemplate.Name @ "is not an X2ItemTemplate");
 			continue;
 		}
-
-		SchematicTemplate = ItemTemplateManager.FindItemTemplate(ItemTemplate.CreatorTemplateName);
 
 		ItemTemplate.Requirements = SchematicTemplate.Requirements;
 	}
