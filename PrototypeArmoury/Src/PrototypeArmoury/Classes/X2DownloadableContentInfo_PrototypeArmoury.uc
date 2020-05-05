@@ -23,6 +23,8 @@ static event OnPostTemplatesCreated ()
 	class'PATemplateMods'.static.MakeItemsBuildable();
 	class'PATemplateMods'.static.ApplyTradingPostModifiers();
 	class'PATemplateMods'.static.KillItems();
+	
+	class'PATemplateMods'.static.AutoConvertItems();
 	class'PATemplateMods'.static.OverrideItemCosts();
 
 	class'PATemplateMods'.static.PatchTLPArmorsets();
