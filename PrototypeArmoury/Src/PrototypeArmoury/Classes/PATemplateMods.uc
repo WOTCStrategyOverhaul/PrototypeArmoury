@@ -1,9 +1,9 @@
 class PATemplateMods extends Object abstract config(StrategyTuning);
 
-var config array<name> arrDataSetsToForceVariants;
+var config array<ItemFromDLC> arrDataSetsToForceVariants;
 
-var config array<name> arrMakeItemBuildable;
-var config array<name> arrKillItems;
+var config array<ItemFromDLC> arrMakeItemBuildable;
+var config array<ItemFromDLC> arrKillItems;
 var config array<TradingPostValueModifier> arrTradingPostModifiers;
 
 var config array<name> arrPrototypesToDisable;
@@ -18,16 +18,19 @@ var config float AutoBlackMarketPriceMult;
 
 static function ForceDifficultyVariants ()
 {
-	local name DataSetToPatch;
+	local ItemFromDLC DataSetToPatch;
 	local X2DataSet DataSetCDO;
 
 	foreach default.arrDataSetsToForceVariants(DataSetToPatch)
 	{
-		DataSetCDO = X2DataSet(class'XComEngine'.static.GetClassDefaultObjectByName(DataSetToPatch));
+		if (!class'PAHelpers'.static.IsDLCLoaded(DataSetToPatch.DLC))
+			continue;
+
+		DataSetCDO = X2DataSet(class'XComEngine'.static.GetClassDefaultObjectByName(DataSetToPatch.ItemName));
 
 		if (DataSetCDO == none)
 		{
-			`PA_WarnNoStack(DataSetToPatch @ "is not a valid X2DataSet class");
+			`PA_WarnNoStack(DataSetToPatch.ItemName @ "is not a valid X2DataSet class");
 		}
 		else
 		{
@@ -40,15 +43,18 @@ static function MakeItemsBuildable ()
 {
 	local X2ItemTemplateManager ItemTemplateManager;
 	local PAEventListener_UI UIEventListener;
-	local name TemplateName;
+	local ItemFromDLC TemplateItem;
 	
 	UIEventListener = PAEventListener_UI(class'XComEngine'.static.GetClassDefaultObject(class'PAEventListener_UI'));
 	ItemTemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
 	`PA_Log("Making items buildable");
 
-	foreach default.arrMakeItemBuildable(TemplateName)
+	foreach default.arrMakeItemBuildable(TemplateItem)
 	{
-		MakeItemBuildable(TemplateName, ItemTemplateManager, UIEventListener);
+		if (!class'PAHelpers'.static.IsDLCLoaded(TemplateItem.DLC))
+			continue;
+
+		MakeItemBuildable(TemplateItem.ItemName, ItemTemplateManager, UIEventListener);
 	}
 }
 
@@ -110,6 +116,9 @@ static function ApplyTradingPostModifiers ()
 
 	foreach default.arrTradingPostModifiers(ValueModifier)
 	{
+		if (!class'PAHelpers'.static.IsDLCLoaded(ValueModifier.DLC))
+			continue;
+
 		ApplyTradingPostModifier(ValueModifier, ItemTemplateManager);
 	}
 }
@@ -125,14 +134,17 @@ static function ApplyTradingPostModifier (TradingPostValueModifier ValueModifier
 static function KillItems ()
 {
 	local X2ItemTemplateManager ItemTemplateManager;
-	local name TemplateName;
+	local ItemFromDLC TemplateItem;
 
 	ItemTemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
 	`PA_Log("Killing items");
 
-	foreach default.arrKillItems(TemplateName)
+	foreach default.arrKillItems(TemplateItem)
 	{
-		KillItem(TemplateName, ItemTemplateManager);
+		if (!class'PAHelpers'.static.IsDLCLoaded(TemplateItem.DLC))
+			continue;
+
+		KillItem(TemplateItem.ItemName, ItemTemplateManager);
 	}
 }
 
@@ -181,6 +193,9 @@ static function AutoConvertItems ()
 
 	foreach default.arrAutoConvertItem(ConversionEntry)
 	{
+		if (!class'PAHelpers'.static.IsDLCLoaded(ConversionEntry.DLC))
+			continue;
+
 		TemplateName = ConversionEntry.ItemName;
 		ItemTemplate = ItemTemplateManager.FindItemTemplate(TemplateName);
 		
@@ -260,6 +275,9 @@ static function OverrideItemCosts ()
 
 	foreach default.arrItemCostOverrides(ItemCostOverrideEntry)
 	{
+		if (!class'PAHelpers'.static.IsDLCLoaded(ItemCostOverrideEntry.DLC))
+			continue;
+
 		DifficultyVariants.Length = 0;
 		ItemTemplateManager.FindDataTemplateAllDifficulties(ItemCostOverrideEntry.ItemName, DifficultyVariants);
 		
@@ -316,6 +334,9 @@ static function OverrideItemCosts ()
 
 static function PatchTLPArmorsets ()
 {
+	if (!class'PAHelpers'.static.IsDLCLoaded("TLE"))
+		return;
+
 	PatchTLPRanger();
 	PatchTLPGrenadier();
 	PatchTLPSpecialist();
@@ -399,6 +420,9 @@ static function PatchTLPWeapons ()
 	local X2WeaponTemplate				Template;
 	local name							ItemName;
 	
+	if (!class'PAHelpers'.static.IsDLCLoaded("TLE"))
+		return;
+
 	TemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
 
 	foreach default.arrPrototypesToDisable(ItemName)
@@ -451,6 +475,9 @@ static protected function bool ReturnFalse ()
 
 static function PatchWeaponTechs ()
 {
+	if (!class'PAHelpers'.static.IsDLCLoaded("TLE"))
+		return;
+
 	if(default.PrototypePrimaries)
 	{
 		AddPrototypeItem('MagnetizedWeapons', 'TLE_AssaultRifle_MG');

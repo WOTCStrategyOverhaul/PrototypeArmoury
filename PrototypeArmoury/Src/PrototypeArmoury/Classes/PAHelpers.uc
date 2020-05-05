@@ -1,5 +1,17 @@
 class PAHelpers extends Object abstract;
 
+static function bool IsDLCLoaded (coerce string DLCName)
+{
+	local array<string> DLCs;
+
+	if (DLCName == "")
+		return true;
+
+	DLCs = class'Helpers'.static.GetInstalledDLCNames();
+
+	return DLCs.Find(DLCName) != INDEX_NONE;
+}
+
 ///////////////////
 /// Log helpers ///
 ///////////////////
