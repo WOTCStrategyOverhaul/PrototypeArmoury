@@ -37,7 +37,7 @@ struct AutoItemConversion
 	var string DLC;
 };
 
-struct RequiredDLC
+struct ItemFromDLC
 {
 	var name ItemName;
 	var string DLC;

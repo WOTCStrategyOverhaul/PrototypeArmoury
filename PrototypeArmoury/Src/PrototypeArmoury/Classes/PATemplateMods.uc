@@ -1,9 +1,9 @@
 class PATemplateMods extends Object abstract config(StrategyTuning);
 
-var config array<RequiredDLC> arrDataSetsToForceVariants;
+var config array<ItemFromDLC> arrDataSetsToForceVariants;
 
-var config array<RequiredDLC> arrMakeItemBuildable;
-var config array<RequiredDLC> arrKillItems;
+var config array<ItemFromDLC> arrMakeItemBuildable;
+var config array<ItemFromDLC> arrKillItems;
 var config array<TradingPostValueModifier> arrTradingPostModifiers;
 
 var config array<name> arrPrototypesToDisable;
@@ -18,7 +18,7 @@ var config float AutoBlackMarketPriceMult;
 
 static function ForceDifficultyVariants ()
 {
-	local RequiredDLC DataSetToPatch;
+	local ItemFromDLC DataSetToPatch;
 	local X2DataSet DataSetCDO;
 
 	foreach default.arrDataSetsToForceVariants(DataSetToPatch)
@@ -43,7 +43,7 @@ static function MakeItemsBuildable ()
 {
 	local X2ItemTemplateManager ItemTemplateManager;
 	local PAEventListener_UI UIEventListener;
-	local RequiredDLC TemplateItem;
+	local ItemFromDLC TemplateItem;
 	
 	UIEventListener = PAEventListener_UI(class'XComEngine'.static.GetClassDefaultObject(class'PAEventListener_UI'));
 	ItemTemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
@@ -134,7 +134,7 @@ static function ApplyTradingPostModifier (TradingPostValueModifier ValueModifier
 static function KillItems ()
 {
 	local X2ItemTemplateManager ItemTemplateManager;
-	local RequiredDLC TemplateItem;
+	local ItemFromDLC TemplateItem;
 
 	ItemTemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
 	`PA_Log("Killing items");
