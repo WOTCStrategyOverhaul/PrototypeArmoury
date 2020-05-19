@@ -363,24 +363,24 @@ static function AdjustItemCost (X2ItemTemplate ItemTemplate)
 	else
 	{
 		TemplateDifficulty = -1; // Untranslatable Bitfield
-		`PA_Log("Cannot adjust cost - invalid difficulty");
+		`PA_Trace("Cannot adjust cost - invalid difficulty");
 		return;
 	}
 
 	if (class'PAHelpers'.static.IsDLCLoaded("CovertInfiltration"))
 	{
-		`PA_Log("Covert Infiltration Detected!");
+		`PA_Trace("Covert Infiltration Detected!");
 		ResourceMultipliers = default.ResourceCostScalars_CI;
 		ArtifactMultipliers = default.ArtifactCostScalars_CI;
 	}
 	else
 	{
-		`PA_Log("Covert Infiltration Missing!");
+		`PA_Trace("Covert Infiltration Missing!");
 		ResourceMultipliers = default.ResourceCostScalars;
 		ArtifactMultipliers = default.ArtifactCostScalars;
 	}
 	
-	`PA_Log("Adjusting item cost of " $ ItemTemplate.DataName $ " on difficulty " $ TemplateDifficulty);
+	`PA_Trace("Adjusting item cost of " $ ItemTemplate.DataName $ " on difficulty " $ TemplateDifficulty);
 
 	for (i = 0; i < ItemTemplate.Cost.ResourceCosts.Length; i++)
 	{
@@ -388,7 +388,7 @@ static function AdjustItemCost (X2ItemTemplate ItemTemplate)
 		{
 			if (ItemTemplate.Cost.ResourceCosts[i].ItemTemplateName == CostScalar.ItemTemplateName && TemplateDifficulty == CostScalar.Difficulty)
 			{
-				`PA_Log("--> " $ CostScalar.ItemTemplateName $ ": " $ CostScalar.Scalar);
+				`PA_Trace("--> " $ CostScalar.ItemTemplateName $ ": " $ CostScalar.Scalar);
 				ItemTemplate.Cost.ResourceCosts[i].Quantity = Round(ItemTemplate.Cost.ResourceCosts[i].Quantity * CostScalar.Scalar);
 			}
 		}
@@ -400,7 +400,7 @@ static function AdjustItemCost (X2ItemTemplate ItemTemplate)
 		{
 			if ((ItemTemplate.Cost.ArtifactCosts[i].ItemTemplateName == CostScalar.ItemTemplateName || CostScalar.ItemTemplateName == 'AllArtifacts') && TemplateDifficulty == CostScalar.Difficulty)
 			{
-				`PA_Log("--> " $ ItemTemplate.Cost.ArtifactCosts[i].ItemTemplateName $ ": " $ CostScalar.Scalar);
+				`PA_Trace("--> " $ ItemTemplate.Cost.ArtifactCosts[i].ItemTemplateName $ ": " $ CostScalar.Scalar);
 				ItemTemplate.Cost.ArtifactCosts[i].Quantity = Round(ItemTemplate.Cost.ArtifactCosts[i].Quantity * CostScalar.Scalar);
 			}
 		}
