@@ -5,12 +5,11 @@ var config array<ItemFromDLC> arrMakeItemBuildable;
 var config array<ItemFromDLC> arrKillItems;
 var config array<TradingPostValueModifier> arrTradingPostModifiers;
 
-var config(StrategyTuning) array<StrategyCostScalar> ResourceCostScalars;
-var config(StrategyTuning) array<StrategyCostScalar> ArtifactCostMultiplier;
+var config array<StrategyCostScalar> ResourceCostScalars;
+var config array<StrategyCostScalar> ArtifactCostScalars;
 
-var config(StrategyTuning) bool PrototypePrimaries;
-var config(StrategyTuning) bool PrototypeSecondaries;
-var config(StrategyTuning) bool PrototypeArmorsets;
+var config array<StrategyCostScalar> ResourceCostScalars_CI;
+var config array<StrategyCostScalar> ArtifactCostScalars_CI;
 
 var config array<name> arrPrototypesToDisable;
 var config bool PrototypePrimaries;
@@ -21,8 +20,6 @@ var config array<ItemCostOverride> arrItemCostOverrides;
 
 var config array<AutoItemConversion> arrAutoConvertItem;
 var config float AutoBlackMarketPriceMult;
-
-var config(StrategyTuning) array<ItemCostOverride> arrItemCostOverrides;
 
 static function ForceDifficultyVariants ()
 {
@@ -78,7 +75,7 @@ static function MakeItemBuildable (name TemplateName, X2ItemTemplateManager Item
 	
 	`PA_Trace("Evaluating" @ TemplateName);
 
-	foreach DifficulityVariants(DataTemplate)
+	foreach DifficultyVariants(DataTemplate)
 	{
 		ItemTemplate = X2ItemTemplate(DataTemplate);
 
@@ -343,6 +340,7 @@ static function OverrideItemCosts ()
 
 static function AdjustItemCost (X2ItemTemplate ItemTemplate)
 {
+	local array<StrategyCostScalar> ResourceMultipliers, ArtifactMultipliers;
 	local StrategyCostScalar CostScalar;
 	local int TemplateDifficulty, i;
 
@@ -368,11 +366,25 @@ static function AdjustItemCost (X2ItemTemplate ItemTemplate)
 		`PA_Log("Cannot adjust cost - invalid difficulty");
 		return;
 	}
+
+	if (class'PAHelpers'.static.IsDLCLoaded("CovertInfiltration"))
+	{
+		`PA_Log("Covert Infiltration Detected!");
+		ResourceMultipliers = default.ResourceCostScalars_CI;
+		ArtifactMultipliers = default.ArtifactCostScalars_CI;
+	}
+	else
+	{
+		`PA_Log("Covert Infiltration Missing!");
+		ResourceMultipliers = default.ResourceCostScalars;
+		ArtifactMultipliers = default.ArtifactCostScalars;
+	}
 	
 	`PA_Log("Adjusting item cost of " $ ItemTemplate.DataName $ " on difficulty " $ TemplateDifficulty);
+
 	for (i = 0; i < ItemTemplate.Cost.ResourceCosts.Length; i++)
 	{
-		foreach default.ResourceCostScalars(CostScalar)
+		foreach ResourceMultipliers(CostScalar)
 		{
 			if (ItemTemplate.Cost.ResourceCosts[i].ItemTemplateName == CostScalar.ItemTemplateName && TemplateDifficulty == CostScalar.Difficulty)
 			{
@@ -384,7 +396,7 @@ static function AdjustItemCost (X2ItemTemplate ItemTemplate)
 
 	for (i = 0; i < ItemTemplate.Cost.ArtifactCosts.Length; i++)
 	{
-		foreach default.ArtifactCostMultiplier(CostScalar)
+		foreach ArtifactMultipliers(CostScalar)
 		{
 			if ((ItemTemplate.Cost.ArtifactCosts[i].ItemTemplateName == CostScalar.ItemTemplateName || CostScalar.ItemTemplateName == 'AllArtifacts') && TemplateDifficulty == CostScalar.Difficulty)
 			{
