@@ -5,19 +5,15 @@ static function bool IsDLCLoaded (coerce string DLCName)
     local XComOnlineEventMgr EventManager;
     local int                Index;
 	
-	`PA_Trace("Checking Mod: " $ DLCName);
+	`PA_Trace("Checking if loaded: " $ DLCName);
 
 	if (DLCName == "")
 		return true;
 
     EventManager = `ONLINEEVENTMGR;
 	
-	`PA_Trace("Installed Mods: " $ EventManager.GetNumDLC());
-
     for (Index = 0; Index < EventManager.GetNumDLC(); Index++)    
     {
-		`PA_Trace("--> " $ EventManager.GetDLCNames(Index));
-
         if(EventManager.GetDLCNames(Index) == name(DLCName))    
         {
             return true;
