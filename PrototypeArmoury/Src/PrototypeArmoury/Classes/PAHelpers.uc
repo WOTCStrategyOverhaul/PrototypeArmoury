@@ -1,15 +1,26 @@
 class PAHelpers extends Object abstract;
 
-static function bool IsDLCLoaded (coerce string DLCName)
+static function bool IsDLCLoaded (name DLCName)
 {
-	local array<string> DLCs;
+    local XComOnlineEventMgr EventManager;
+    local int                Index;
+	
+	`PA_Trace("Checking if loaded: " $ DLCName);
 
-	if (DLCName == "")
+	if (DLCName == '')
 		return true;
 
-	DLCs = class'Helpers'.static.GetInstalledDLCNames();
+    EventManager = `ONLINEEVENTMGR;
+	
+    for (Index = 0; Index < EventManager.GetNumDLC(); Index++)    
+    {
+        if(EventManager.GetDLCNames(Index) == DLCName)    
+        {
+            return true;
+        }
+    }
 
-	return DLCs.Find(DLCName) != INDEX_NONE;
+    return false;
 }
 
 ///////////////////

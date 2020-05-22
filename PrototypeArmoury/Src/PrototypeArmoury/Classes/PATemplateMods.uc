@@ -1,10 +1,15 @@
 class PATemplateMods extends Object abstract config(StrategyTuning);
 
 var config array<ItemFromDLC> arrDataSetsToForceVariants;
-
 var config array<ItemFromDLC> arrMakeItemBuildable;
 var config array<ItemFromDLC> arrKillItems;
 var config array<TradingPostValueModifier> arrTradingPostModifiers;
+
+var config array<StrategyCostScalar> ResourceCostScalars;
+var config array<StrategyCostScalar> ArtifactCostScalars;
+
+var config array<StrategyCostScalar> ResourceCostScalars_CI;
+var config array<StrategyCostScalar> ArtifactCostScalars_CI;
 
 var config array<name> arrPrototypesToDisable;
 var config bool PrototypePrimaries;
@@ -44,10 +49,10 @@ static function MakeItemsBuildable ()
 	local X2ItemTemplateManager ItemTemplateManager;
 	local PAEventListener_UI UIEventListener;
 	local ItemFromDLC TemplateItem;
-	
+
 	UIEventListener = PAEventListener_UI(class'XComEngine'.static.GetClassDefaultObject(class'PAEventListener_UI'));
 	ItemTemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
-	`PA_Log("Making items buildable");
+	`PA_Log("Making" @ default.arrMakeItemBuildable.Length @ "items buildable");
 
 	foreach default.arrMakeItemBuildable(TemplateItem)
 	{
@@ -67,6 +72,8 @@ static function MakeItemBuildable (name TemplateName, X2ItemTemplateManager Item
 	local X2ItemTemplate ItemTemplate;
 
 	ItemTemplateManager.FindDataTemplateAllDifficulties(TemplateName, DifficultyVariants);
+	
+	`PA_Trace("Evaluating" @ TemplateName);
 
 	foreach DifficultyVariants(DataTemplate)
 	{
@@ -102,6 +109,8 @@ static function MakeItemBuildable (name TemplateName, X2ItemTemplateManager Item
 		ItemTemplate.CanBeBuilt = true;
 		ItemTemplate.bInfiniteItem = false;
 		ItemTemplate.CreatorTemplateName = '';
+		
+		AdjustItemCost(ItemTemplate);
 
 		`PA_Trace(ItemTemplate.Name @ "was made single-buildable" @ `showvar(ItemTemplate.Requirements.RequiredTechs.Length));
 	}
@@ -269,7 +278,7 @@ static function OverrideItemCosts ()
 	local X2ItemTemplate ItemTemplate;
 	local ItemCostOverride ItemCostOverrideEntry;
 	local int TemplateDifficulty;
-	
+
 	ItemTemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
 	`PA_Log("Overriding item costs");
 
@@ -291,6 +300,7 @@ static function OverrideItemCosts ()
 			ItemTemplate = X2ItemTemplate(DifficultyVariants[0]);
 			`PA_Trace(ItemTemplate.DataName $ " has had its cost overridden to non-legend values");
 			ItemTemplate.Cost = ItemCostOverrideEntry.NewCost;
+			
 			continue;
 		}
 
@@ -328,13 +338,82 @@ static function OverrideItemCosts ()
 	}
 }
 
+static function AdjustItemCost (X2ItemTemplate ItemTemplate)
+{
+	local array<StrategyCostScalar> ResourceMultipliers, ArtifactMultipliers;
+	local StrategyCostScalar CostScalar;
+	local int TemplateDifficulty, i;
+
+	if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Rookie))
+	{
+		TemplateDifficulty = 0; // Rookie
+	}
+	else if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Veteran))
+	{
+		TemplateDifficulty = 1; // Veteran
+	}
+	else if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Commander))
+	{
+		TemplateDifficulty = 2; // Commander
+	}
+	else if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Legend))
+	{
+		TemplateDifficulty = 3; // Legend
+	}
+	else
+	{
+		TemplateDifficulty = -1; // Untranslatable Bitfield
+		`PA_Trace("Cannot adjust cost - invalid difficulty");
+		return;
+	}
+
+	if (class'PAHelpers'.static.IsDLCLoaded('CovertInfiltration'))
+	{
+		`PA_Trace("Covert Infiltration Detected!");
+		ResourceMultipliers = default.ResourceCostScalars_CI;
+		ArtifactMultipliers = default.ArtifactCostScalars_CI;
+	}
+	else
+	{
+		`PA_Trace("Covert Infiltration Missing!");
+		ResourceMultipliers = default.ResourceCostScalars;
+		ArtifactMultipliers = default.ArtifactCostScalars;
+	}
+	
+	`PA_Trace("Adjusting item cost of " $ ItemTemplate.DataName $ " on difficulty " $ TemplateDifficulty);
+
+	for (i = 0; i < ItemTemplate.Cost.ResourceCosts.Length; i++)
+	{
+		foreach ResourceMultipliers(CostScalar)
+		{
+			if (ItemTemplate.Cost.ResourceCosts[i].ItemTemplateName == CostScalar.ItemTemplateName && TemplateDifficulty == CostScalar.Difficulty)
+			{
+				`PA_Trace("--> " $ CostScalar.ItemTemplateName $ ": " $ CostScalar.Scalar);
+				ItemTemplate.Cost.ResourceCosts[i].Quantity = Round(ItemTemplate.Cost.ResourceCosts[i].Quantity * CostScalar.Scalar);
+			}
+		}
+	}
+
+	for (i = 0; i < ItemTemplate.Cost.ArtifactCosts.Length; i++)
+	{
+		foreach ArtifactMultipliers(CostScalar)
+		{
+			if ((ItemTemplate.Cost.ArtifactCosts[i].ItemTemplateName == CostScalar.ItemTemplateName || CostScalar.ItemTemplateName == 'AllArtifacts') && TemplateDifficulty == CostScalar.Difficulty)
+			{
+				`PA_Trace("--> " $ ItemTemplate.Cost.ArtifactCosts[i].ItemTemplateName $ ": " $ CostScalar.Scalar);
+				ItemTemplate.Cost.ArtifactCosts[i].Quantity = Round(ItemTemplate.Cost.ArtifactCosts[i].Quantity * CostScalar.Scalar);
+			}
+		}
+	}
+}
+
 ///////////
 /// TLE ///
 ///////////
 
 static function PatchTLPArmorsets ()
 {
-	if (!class'PAHelpers'.static.IsDLCLoaded("TLE"))
+	if (!class'PAHelpers'.static.IsDLCLoaded('TLE'))
 		return;
 
 	PatchTLPRanger();
@@ -420,7 +499,7 @@ static function PatchTLPWeapons ()
 	local X2WeaponTemplate				Template;
 	local name							ItemName;
 	
-	if (!class'PAHelpers'.static.IsDLCLoaded("TLE"))
+	if (!class'PAHelpers'.static.IsDLCLoaded('TLE'))
 		return;
 
 	TemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
@@ -475,7 +554,7 @@ static protected function bool ReturnFalse ()
 
 static function PatchWeaponTechs ()
 {
-	if (!class'PAHelpers'.static.IsDLCLoaded("TLE"))
+	if (!class'PAHelpers'.static.IsDLCLoaded('TLE'))
 		return;
 
 	if(default.PrototypePrimaries)

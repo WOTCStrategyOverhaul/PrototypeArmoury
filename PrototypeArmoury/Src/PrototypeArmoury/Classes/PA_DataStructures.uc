@@ -17,7 +17,7 @@ struct TradingPostValueModifier
 {
 	var name ItemName;
 	var int NewValue;
-	var string DLC;
+	var name DLC;
 };
 
 struct ItemCostOverride
@@ -25,7 +25,7 @@ struct ItemCostOverride
 	var name ItemName;
 	var array<int> Difficulties;
 	var StrategyCost NewCost;
-	var string DLC;
+	var name DLC;
 };
 
 struct AutoItemConversion
@@ -34,11 +34,11 @@ struct AutoItemConversion
 	var int Supplies;
 	var int Alloys;
 	var int Elerium;
-	var string DLC;
+	var name DLC;
 };
 
 struct ItemFromDLC
 {
 	var name ItemName;
-	var string DLC;
+	var name DLC;
 };
