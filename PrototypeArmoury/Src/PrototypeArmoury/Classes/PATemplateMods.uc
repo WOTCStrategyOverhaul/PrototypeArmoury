@@ -367,7 +367,7 @@ static function AdjustItemCost (X2ItemTemplate ItemTemplate)
 		return;
 	}
 
-	if (class'PAHelpers'.static.IsDLCLoaded("CovertInfiltration"))
+	if (class'PAHelpers'.static.IsDLCLoaded('CovertInfiltration'))
 	{
 		`PA_Trace("Covert Infiltration Detected!");
 		ResourceMultipliers = default.ResourceCostScalars_CI;
@@ -413,7 +413,7 @@ static function AdjustItemCost (X2ItemTemplate ItemTemplate)
 
 static function PatchTLPArmorsets ()
 {
-	if (!class'PAHelpers'.static.IsDLCLoaded("TLE"))
+	if (!class'PAHelpers'.static.IsDLCLoaded('TLE'))
 		return;
 
 	PatchTLPRanger();
@@ -499,7 +499,7 @@ static function PatchTLPWeapons ()
 	local X2WeaponTemplate				Template;
 	local name							ItemName;
 	
-	if (!class'PAHelpers'.static.IsDLCLoaded("TLE"))
+	if (!class'PAHelpers'.static.IsDLCLoaded('TLE'))
 		return;
 
 	TemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
@@ -554,7 +554,7 @@ static protected function bool ReturnFalse ()
 
 static function PatchWeaponTechs ()
 {
-	if (!class'PAHelpers'.static.IsDLCLoaded("TLE"))
+	if (!class'PAHelpers'.static.IsDLCLoaded('TLE'))
 		return;
 
 	if(default.PrototypePrimaries)
