@@ -20,13 +20,15 @@ static protected function X2DataTemplate CreateTLPKevlar ()
 	Template.StartingItem = true;
 	Template.CanBeBuilt = false;
 	Template.bInfiniteItem = false;
+	Template.Abilities.AddItem('TLE_KevlarArmorStats');
 	Template.ArmorTechCat = 'conventional';
 	Template.ArmorClass = 'basic';
 	Template.Tier = 0;
 	Template.AkAudioSoldierArmorSwitch = 'Conventional';
 	Template.EquipSound = "StrategyUI_Armor_Equip_Conventional";
-
-	Template.SetUIStatMarkup(class'XLocalizedData'.default.HealthLabel, eStat_HP, 0, true);
+	
+	Template.SetUIStatMarkup(class'XLocalizedData'.default.HealthLabel, eStat_HP, class'X2Ability_PA_TLEArmorAbilitySet'.default.TLE_KEVLAR_HEALTH_BONUS, true);
+	Template.SetUIStatMarkup(class'XLocalizedData'.default.ArmorLabel, eStat_ArmorMitigation, class'X2Ability_PA_TLEArmorAbilitySet'.default.TLE_KEVLAR_MITIGATION_AMOUNT);
 
 	Template.ArmorCat = 'soldier';
 
@@ -40,13 +42,12 @@ static protected function X2DataTemplate CreateTLPPlated ()
 	`CREATE_X2TEMPLATE(class'X2ArmorTemplate', Template, 'TLE_PlatedArmor');
 	Template.strImage = "img:///UILibrary_TLE_Common.TLE_Inv_PLT_Support";
 	Template.ItemCat = 'armor';
-	Template.bAddsUtilitySlot = true;
 	Template.StartingItem = false;
 	Template.CanBeBuilt = false;
 	Template.bInfiniteItem = false;
 	Template.TradingPostValue = 20;
 	Template.PointsToComplete = 0;
-	Template.Abilities.AddItem('MediumPlatedArmorStats');
+	Template.Abilities.AddItem('TLE_PlatedArmorStats');
 	Template.ArmorTechCat = 'plated';
 	Template.ArmorClass = 'medium';
 	Template.Tier = 1;
@@ -54,10 +55,8 @@ static protected function X2DataTemplate CreateTLPPlated ()
 	Template.EquipNarrative = "X2NarrativeMoments.Strategy.CIN_ArmorIntro_PlatedMedium";
 	Template.EquipSound = "StrategyUI_Armor_Equip_Plated";
 
-	//Template.CreatorTemplateName = 'MediumPlatedArmor_Schematic'; // The schematic which creates this item
-	//Template.BaseItem = 'TLE_KevlarArmor'; // Which item this will be upgraded from
-
-	Template.SetUIStatMarkup(class'XLocalizedData'.default.HealthLabel, eStat_HP, class'X2Ability_ItemGrantedAbilitySet'.default.MEDIUM_PLATED_HEALTH_BONUS, true);
+	Template.SetUIStatMarkup(class'XLocalizedData'.default.HealthLabel, eStat_HP, class'X2Ability_PA_TLEArmorAbilitySet'.default.TLE_PLATED_HEALTH_BONUS, true);
+	Template.SetUIStatMarkup(class'XLocalizedData'.default.ArmorLabel, eStat_ArmorMitigation, class'X2Ability_PA_TLEArmorAbilitySet'.default.TLE_PLATED_MITIGATION_AMOUNT);
 
 	Template.ArmorCat = 'soldier';
 
@@ -71,13 +70,12 @@ static protected function X2DataTemplate CreateTLPPowered ()
 	`CREATE_X2TEMPLATE(class'X2ArmorTemplate', Template, 'TLE_PoweredArmor');
 	Template.strImage = "img:///UILibrary_TLE_Common.TLE_Inv_PWR_Support";
 	Template.ItemCat = 'armor';
-	Template.bAddsUtilitySlot = true;
 	Template.StartingItem = false;
 	Template.CanBeBuilt = false;
 	Template.bInfiniteItem = false;
 	Template.TradingPostValue = 60;
 	Template.PointsToComplete = 0;
-	Template.Abilities.AddItem('MediumPoweredArmorStats');
+	Template.Abilities.AddItem('TLE_PoweredArmorStats');
 	Template.ArmorTechCat = 'powered';
 	Template.ArmorClass = 'medium';
 	Template.Tier = 3;
@@ -85,11 +83,8 @@ static protected function X2DataTemplate CreateTLPPowered ()
 	Template.EquipNarrative = "X2NarrativeMoments.Strategy.CIN_ArmorIntro_PoweredMedium";
 	Template.EquipSound = "StrategyUI_Armor_Equip_Powered";
 
-	//Template.CreatorTemplateName = MediumPoweredArmor_Schematic'; // The schematic which creates this item
-	//Template.BaseItem = 'TLE_PlatedArmor'; // Which item this will be upgraded from
-
-	Template.SetUIStatMarkup(class'XLocalizedData'.default.HealthLabel, eStat_HP, class'X2Ability_ItemGrantedAbilitySet'.default.MEDIUM_POWERED_HEALTH_BONUS, true);
-	Template.SetUIStatMarkup(class'XLocalizedData'.default.ArmorLabel, eStat_ArmorMitigation, class'X2Ability_ItemGrantedAbilitySet'.default.MEDIUM_POWERED_MITIGATION_AMOUNT);
+	Template.SetUIStatMarkup(class'XLocalizedData'.default.HealthLabel, eStat_HP, class'X2Ability_PA_TLEArmorAbilitySet'.default.TLE_POWERED_HEALTH_BONUS, true);
+	Template.SetUIStatMarkup(class'XLocalizedData'.default.ArmorLabel, eStat_ArmorMitigation, class'X2Ability_PA_TLEArmorAbilitySet'.default.TLE_POWERED_MITIGATION_AMOUNT);
 
 	Template.ArmorCat = 'soldier';
 
