@@ -30,6 +30,9 @@
     <Content Include="Config\Items\XComGameCore.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Config\Items\XComInfiltration.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Config\Items\XComStrategyTuning.ini">
       <SubType>Content</SubType>
     </Content>
