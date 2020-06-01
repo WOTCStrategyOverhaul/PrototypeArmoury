@@ -27,6 +27,9 @@
     <Content Include="Config\Items\XComContent.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Config\Items\XComGameCore.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Config\Items\XComStrategyTuning.ini">
       <SubType>Content</SubType>
     </Content>
@@ -133,6 +136,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\PrototypeArmoury\Classes\UIUtilities_PA.uc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Src\PrototypeArmoury\Classes\X2Ability_PA_TLEArmorAbilitySet.uc">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Src\PrototypeArmoury\Classes\X2DownloadableContentInfo_PrototypeArmoury.uc" />
