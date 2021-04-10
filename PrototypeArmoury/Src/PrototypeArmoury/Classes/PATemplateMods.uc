@@ -12,6 +12,7 @@ var config array<StrategyCostScalar> ResourceCostScalars_CI;
 var config array<StrategyCostScalar> ArtifactCostScalars_CI;
 
 var config array<name> arrPrototypesToDisable;
+var config array<name> arrTLPArmorsToHide;
 var config bool PrototypePrimaries;
 var config bool PrototypeSecondaries;
 var config bool PrototypeArmorsets;
@@ -413,84 +414,26 @@ static function AdjustItemCost (X2ItemTemplate ItemTemplate)
 
 static function PatchTLPArmorsets ()
 {
+	local X2ItemTemplateManager			TemplateManager;
+	local X2ArmorTemplate				Template;
+	local name							ItemName;
+
 	if (!class'PAHelpers'.static.IsDLCLoaded('TLE'))
 		return;
-
-	PatchTLPRanger();
-	PatchTLPGrenadier();
-	PatchTLPSpecialist();
-	PatchTLPSharpshooter();
-	PatchTLPPsiOperative();
-}
-
-static protected function PatchTLPRanger ()
-{
-	local X2ItemTemplateManager			TemplateManager;
-	local X2ArmorTemplate				Template;
-	
+		
 	TemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
-	Template = X2ArmorTemplate(TemplateManager.FindItemTemplate('RangerKevlarArmor'));
-	Template.StartingItem = false;
-	Template = X2ArmorTemplate(TemplateManager.FindItemTemplate('RangerPlatedArmor'));
-	Template.CreatorTemplateName = 'none';
-	Template = X2ArmorTemplate(TemplateManager.FindItemTemplate('RangerPoweredArmor'));
-	Template.CreatorTemplateName = 'none';
-}
 
-static protected function PatchTLPGrenadier ()
-{
-	local X2ItemTemplateManager			TemplateManager;
-	local X2ArmorTemplate				Template;
-	
-	TemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
-	Template = X2ArmorTemplate(TemplateManager.FindItemTemplate('GrenadierKevlarArmor'));
-	Template.StartingItem = false;
-	Template = X2ArmorTemplate(TemplateManager.FindItemTemplate('GrenadierPlatedArmor'));
-	Template.CreatorTemplateName = 'none';
-	Template = X2ArmorTemplate(TemplateManager.FindItemTemplate('GrenadierPoweredArmor'));
-	Template.CreatorTemplateName = 'none';
-}
+	foreach default.arrTLPArmorsToHide(ItemName)
+	{
+		Template = X2ArmorTemplate(TemplateManager.FindItemTemplate(name(ItemName $ 'KevlarArmor')));
+		if (Template != none) Template.StartingItem = false;
 
-static protected function PatchTLPSpecialist ()
-{
-	local X2ItemTemplateManager			TemplateManager;
-	local X2ArmorTemplate				Template;
-	
-	TemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
-	Template = X2ArmorTemplate(TemplateManager.FindItemTemplate('SpecialistKevlarArmor'));
-	Template.StartingItem = false;
-	Template = X2ArmorTemplate(TemplateManager.FindItemTemplate('SpecialistPlatedArmor'));
-	Template.CreatorTemplateName = 'none';
-	Template = X2ArmorTemplate(TemplateManager.FindItemTemplate('SpecialistPoweredArmor'));
-	Template.CreatorTemplateName = 'none';
-}
+		Template = X2ArmorTemplate(TemplateManager.FindItemTemplate(name(ItemName $ 'PlatedArmor')));
+		if (Template != none) Template.CreatorTemplateName = 'none';
 
-static protected function PatchTLPSharpshooter ()
-{
-	local X2ItemTemplateManager			TemplateManager;
-	local X2ArmorTemplate				Template;
-	
-	TemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
-	Template = X2ArmorTemplate(TemplateManager.FindItemTemplate('SharpshooterKevlarArmor'));
-	Template.StartingItem = false;
-	Template = X2ArmorTemplate(TemplateManager.FindItemTemplate('SharpshooterPlatedArmor'));
-	Template.CreatorTemplateName = 'none';
-	Template = X2ArmorTemplate(TemplateManager.FindItemTemplate('SharpshooterPoweredArmor'));
-	Template.CreatorTemplateName = 'none';
-}
-
-static protected function PatchTLPPsiOperative ()
-{
-	local X2ItemTemplateManager			TemplateManager;
-	local X2ArmorTemplate				Template;
-	
-	TemplateManager = class'X2ItemTemplateManager'.static.GetItemTemplateManager();
-	Template = X2ArmorTemplate(TemplateManager.FindItemTemplate('PsiOperativeKevlarArmor'));
-	Template.StartingItem = false;
-	Template = X2ArmorTemplate(TemplateManager.FindItemTemplate('PsiOperativePlatedArmor'));
-	Template.CreatorTemplateName = 'none';
-	Template = X2ArmorTemplate(TemplateManager.FindItemTemplate('PsiOperativePoweredArmor'));
-	Template.CreatorTemplateName = 'none';
+		Template = X2ArmorTemplate(TemplateManager.FindItemTemplate(name(ItemName $ 'PoweredArmor')));
+		if (Template != none) Template.CreatorTemplateName = 'none';
+	}
 }
 
 static function PatchTLPWeapons ()
