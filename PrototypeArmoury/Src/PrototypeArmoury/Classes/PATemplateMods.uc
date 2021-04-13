@@ -13,9 +13,10 @@ var config array<StrategyCostScalar> ArtifactCostScalars_CI;
 
 var config array<name> arrPrototypesToDisable;
 var config array<name> arrTLPArmorsToHide;
-var config bool PrototypePrimaries;
-var config bool PrototypeSecondaries;
-var config bool PrototypeArmorsets;
+
+var config bool RESEARCH_GRANTS_PRIMARY;
+var config bool RESEARCH_GRANTS_SECONDARY;
+var config bool RESEARCH_GRANTS_ARMORSET;
 
 var config array<ItemCostOverride> arrItemCostOverrides;
 
@@ -500,7 +501,7 @@ static function PatchWeaponTechs ()
 	if (!class'PAHelpers'.static.IsDLCLoaded('TLE'))
 		return;
 
-	if(default.PrototypePrimaries)
+	if(default.RESEARCH_GRANTS_PRIMARY)
 	{
 		AddPrototypeItem('MagnetizedWeapons', 'TLE_AssaultRifle_MG');
 		AddPrototypeItem('PlasmaRifle', 'TLE_AssaultRifle_BM');
@@ -512,7 +513,7 @@ static function PatchWeaponTechs ()
 		AddPrototypeItem('HeavyPlasma', 'TLE_Cannon_BM');
 	}
 
-	if(default.PrototypeSecondaries)
+	if(default.RESEARCH_GRANTS_SECONDARY)
 	{
 		AddPrototypeItem('MagnetizedWeapons', 'TLE_Pistol_MG');
 		AddPrototypeItem('PlasmaRifle', 'TLE_Pistol_BM');
@@ -520,7 +521,7 @@ static function PatchWeaponTechs ()
 		AddPrototypeItem('AutopsyAdventStunLancer', 'TLE_Sword_MG');
 	}
 
-	if(default.PrototypeArmorsets)
+	if(default.RESEARCH_GRANTS_ARMORSET)
 	{
 		AddPrototypeItem('PlatedArmor', 'TLE_PlatedArmor');
 		AddPrototypeItem('PoweredArmor', 'TLE_PoweredArmor');
