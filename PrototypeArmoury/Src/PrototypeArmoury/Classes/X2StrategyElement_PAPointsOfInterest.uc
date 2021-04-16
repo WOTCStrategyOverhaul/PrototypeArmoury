@@ -1,4 +1,7 @@
-class X2StrategyElement_PAPointsOfInterest extends X2StrategyElement;
+class X2StrategyElement_PAPointsOfInterest extends X2StrategyElement config(GameCore);
+
+var config bool PROTOTYPE_SCANSITES;
+var config bool SIDEGRADE_SCANSITES;
 
 static function array<X2DataTemplate> CreateTemplates()
 {
@@ -21,7 +24,7 @@ static function X2DataTemplate CreatePOIPrototypeT2Template()
 
 	`CREATE_X2POINTOFINTEREST_TEMPLATE(Template, 'POI_Prototype_T2');
 
-	Template.CanAppearFn = CurrentTierFully1;
+	Template.CanAppearFn = HasNoTier2_Prototype;
 
 	return Template;
 }
@@ -32,7 +35,7 @@ static function X2DataTemplate CreatePOIPrototypeT3Template()
 
 	`CREATE_X2POINTOFINTEREST_TEMPLATE(Template, 'POI_Prototype_T3');
 
-	Template.CanAppearFn = CurrentTierFully2;
+	Template.CanAppearFn = HasAllTier2_Prototype;
 
 	return Template;
 }
@@ -43,7 +46,7 @@ static function X2DataTemplate CreatePOISidegradeT1Template()
 
 	`CREATE_X2POINTOFINTEREST_TEMPLATE(Template, 'POI_Sidegrade_T1');
 
-	Template.CanAppearFn = CurrentTierFully1;
+	Template.CanAppearFn = HasNoTier2_Sidegrade;
 
 	return Template;
 }
@@ -54,7 +57,7 @@ static function X2DataTemplate CreatePOISidegradeT2Template()
 
 	`CREATE_X2POINTOFINTEREST_TEMPLATE(Template, 'POI_Sidegrade_T2');
 
-	Template.CanAppearFn = CurrentTierPartially2;
+	Template.CanAppearFn = HasSomeTier2_Sidegrade;
 
 	return Template;
 }
@@ -65,47 +68,53 @@ static function X2DataTemplate CreatePOISidegradeT3Template()
 
 	`CREATE_X2POINTOFINTEREST_TEMPLATE(Template, 'POI_Sidegrade_T3');
 
-	Template.CanAppearFn = CurrentTierPartially3;
+	Template.CanAppearFn = HasAllTier3_Sidegrade;
 
 	return Template;
 }
 
 //----------------------------------------------------------------------
 
-static function bool CurrentTierPartially1(XComGameState_PointOfInterest POIState)
+static function bool HasNoTier2_Prototype(XComGameState_PointOfInterest POIState)
 {
-	return (`XCOMHQ.IsTechResearched('MagnetizedWeapons') && `XCOMHQ.IsTechResearched('PlatedArmor')) == false;
-}
-
-static function bool CurrentTierFully1(XComGameState_PointOfInterest POIState)
-{
-	return (`XCOMHQ.IsTechResearched('MagnetizedWeapons') || `XCOMHQ.IsTechResearched('PlatedArmor')) == false;
-}
-
-static function bool CurrentTierPartially2(XComGameState_PointOfInterest POIState)
-{
-	return (`XCOMHQ.IsTechResearched('MagnetizedWeapons') || `XCOMHQ.IsTechResearched('PlatedArmor'));
-}
-
-static function bool CurrentTierFully2(XComGameState_PointOfInterest POIState)
-{
-	return (`XCOMHQ.IsTechResearched('MagnetizedWeapons')
-		&& `XCOMHQ.IsTechResearched('GaussWeapons')
-		&& `XCOMHQ.IsTechResearched('PlatedArmor')
+	return (default.PROTOTYPE_SCANSITES
+		 && `XCOMHQ.IsTechResearched('MagnetizedWeapons') == false
+		 && `XCOMHQ.IsTechResearched('PlatedArmor') == false
 	);
 }
 
-static function bool CurrentTierPartially3(XComGameState_PointOfInterest POIState)
+static function bool HasAllTier2_Prototype(XComGameState_PointOfInterest POIState)
 {
-	return (`XCOMHQ.IsTechResearched('PlasmaRifle') || `XCOMHQ.IsTechResearched('PoweredArmor'));
+	return (default.PROTOTYPE_SCANSITES
+		 && `XCOMHQ.IsTechResearched('MagnetizedWeapons')
+		 && `XCOMHQ.IsTechResearched('GaussWeapons')
+		 && `XCOMHQ.IsTechResearched('PlatedArmor')
+	);
 }
 
-static function bool CurrentTierFully3(XComGameState_PointOfInterest POIState)
+static function bool HasNoTier2_Sidegrade(XComGameState_PointOfInterest POIState)
 {
-	return (`XCOMHQ.IsTechResearched('PlasmaRifle')
-		&& `XCOMHQ.IsTechResearched('HeavyPlasma')
-		&& `XCOMHQ.IsTechResearched('PlasmaSniper')
-		&& `XCOMHQ.IsTechResearched('AlloyCannon')
-		&& `XCOMHQ.IsTechResearched('PoweredArmor')
+	return (default.SIDEGRADE_SCANSITES
+		 && `XCOMHQ.IsTechResearched('MagnetizedWeapons') == false
+		 && `XCOMHQ.IsTechResearched('PlatedArmor') == false
+	);
+}
+
+static function bool HasSomeTier2_Sidegrade(XComGameState_PointOfInterest POIState)
+{
+	return (default.SIDEGRADE_SCANSITES
+		 && (`XCOMHQ.IsTechResearched('MagnetizedWeapons')
+		 || `XCOMHQ.IsTechResearched('PlatedArmor'))
+	);
+}
+
+static function bool HasAllTier3_Sidegrade(XComGameState_PointOfInterest POIState)
+{
+	return (default.SIDEGRADE_SCANSITES
+		 && `XCOMHQ.IsTechResearched('PlasmaRifle')
+		 && `XCOMHQ.IsTechResearched('HeavyPlasma')
+		 && `XCOMHQ.IsTechResearched('PlasmaSniper')
+		 && `XCOMHQ.IsTechResearched('AlloyCannon')
+		 && `XCOMHQ.IsTechResearched('PoweredArmor')
 	);
 }
