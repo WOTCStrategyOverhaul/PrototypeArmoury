@@ -1,0 +1,20 @@
+[PrototypeArmoury_MCMScreen]
+ModName=Prototype Armoury
+PageTitle=Prototype Armoury
+
+CanBeChangedInSaveTitle=Kann während einer Kampagne geändert werden
+REMOVE_NICKNAMED_UPGRADES_Label=Verbesserungen werden von Gegenständen mit Spitznamen entfernt
+REMOVE_NICKNAMED_UPGRADES_Tip="Schalte diese Option aus damit verbesserte Waffen mit Spitznamen nicht von der Option 'VERBESSERUNGEN VERFÜGBAR MACHEN' beeinflusst werden"
+
+CanNotBeChangedInSaveTitle=Kann NICHT während einer Kampagne geändert werden
+FORCE_LOCK_AND_LOAD_Label=Doppelter Nutzen immer aktiv
+FORCE_LOCK_AND_LOAD_Tip=Erlaubt es immer Waffenverbesserungen wiederzuverwenden wenn sie ersetzt werden. Das Spiel muss neugestartet werden damit diese Option aktiv ist
+
+[UIUtilities_PA]
+strDropUpgrade=VERBESSERUNG ENTFERNEN
+strStripUpgrades=VERBESSERUNGEN VERFÜGBAR MACHEN
+strStripUpgradesTooltip=Entfernt alle Verbesserungen von Primärwaffen die nicht gerade von Einheiten in der Truppauswahl benutzt werden.
+strStripUpgradesConfirm=VERBESSERUNGEN VERFÜGBAR MACHEN BESTÄTIGEN
+strStripUpgradesConfirmDesc=Entfernt alle Verbesserungen von Primärwaffen die nicht gerade von Einheiten in der Truppauswahl benutzt werden. Diese Verbesserungen werden sofort verfügbar. Verbesserungen von Waffen mit Spitznamen werden <XGParam:StrValue0>. This can be changed in MCM.
+strStripUpgradesNicknamedYes=ENTFERNT
+strStripUpgradesNicknamedNo=NICHT ENTFERNT

@@ -1,0 +1,50 @@
+[POI_Prototype_T2 X2PointOfInterestTemplate]
+DisplayNames[0]="Widerstand-Notsignal"
+
+CompletedSummaries[0]="Als wir dieses Gebiet scannten, empfingen wir ein SOS-Signal aus einem versteckten Komplex tief in den Ruinen einer Stadt. Anscheinend haben dort ein paar Ex-ADVENT-Wissenschaftler im Insgeheimen ihre Forschung weitergeführt. Wie wissen nicht genau was dann passiert ist, aber unter einem zusammengebrochenen Träger haben wir einen erstaunlichen Prototypen einer uns anscheinend noch fremden Technologie gefunden."
+
+POIImages[0]="img:///UILibrary_StrategyImages.X2StrategyMap.POI_OvergrownCity"
+
+[Reward_PrototypeT2 X2RewardTemplate]
+DisplayName="Fortgeschrittener Prototyp"
+
+[POI_Prototype_T3 X2PointOfInterestTemplate]
+DisplayNames[0]="Altes XCOM-Signal"
+
+CompletedSummaries[0]="Ein Signal das früher von XCOM während der Invasion benutzt wurde, führte uns zu einem unterirdischen Bunker, wahrscheinlich einer damaligen seperaten Forschungseinrichtung. Die Räume waren verlassen, und Einschläge von Plasmawaffen bedeckten die Wände. Die Verteidiger schienen ähnliche Technologie wie die Außerirdischen zu haben, und bei den toten Soldaten die während ihres letzten Kampfes starben, fanden wir etwas Ausrüstung die tatsächlich noch intakt war."
+
+POIImages[0]="img:///UILibrary_StrategyImages.X2StrategyMap.POI_WhatsInTheBarn"
+
+[Reward_PrototypeT3 X2RewardTemplate]
+DisplayName="Fortgeschrittener Prototyp"
+
+[POI_Sidegrade_T1 X2PointOfInterestTemplate]
+DisplayNames[0]="Bunker der Alten Welt"
+CompletedSummaries[0]="Der lokale Widerstand wies uns auf die Existenz eines Militär-Bunkers in den Bergen hin. Er war für unsere Scanner einfach zu finden, aber das schien damals auch der Fall gewesen zu sein, da er durch einen direkten Treffer mit einer UFO-Orbitalwaffe eingeäschert wurde. Ein paar Seitenräume hatten das Inferno aber überlebt, und dort fanden wir eine Rüstungskammer mit modernster Ausrüstung, die dem damaligen Militär wohl durch XCOM zukam."
+
+POIImages[0]="img:///UILibrary_StrategyImages.X2StrategyMap.POI_RadioTower"
+
+[Reward_SidegradeT1 X2RewardTemplate]
+DisplayName="Prototyp-Gegenstände"
+
+[POI_Sidegrade_T2 X2PointOfInterestTemplate]
+DisplayNames[0]="Widerstand-Notsignal"
+
+CompletedSummaries[0]="Während wir dieses Gebiet durchkämmten, empfingen wir aus den Räumen tief unter der Stadt einen dringenden Notruf. Wir waren aber zu spät, und fanden nur noch eine zerstörte Werkstatt mit Spuren eines Kampfes. Wir vermuteten das dort eine Gruppe von Technikern gearbeitet hat, bevor sie irgendwer oder irgendetwas gefunden hat. Nach längerer Suche konnten wir mithilfe unserer Scanner einen Metallschrank aus der Erde heben, und fanden dort drin mehrere Beispiele der Waffen und Rüstungen an denen sie gewerkelt hatten."
+
+POIImages[0]="img:///UILibrary_StrategyImages.X2StrategyMap.POI_OvergrownCity"
+
+[Reward_SidegradeT2 X2RewardTemplate]
+DisplayName="Prototyp-Gegenstände"
+
+[POI_Sidegrade_T3 X2PointOfInterestTemplate]
+DisplayNames[0]="Altes XCOM-Signal"
+
+"Ein Signal das früher von XCOM während der Invasion benutzt wurde, führte uns zu einem unterirdischen Bunker, wahrscheinlich einer damaligen seperaten Forschungseinrichtung. Die Räume waren verlassen, und Einschläge von Plasmawaffen bedeckten die Wände. Die Verteidiger schienen ähnliche Technologie wie die Außerirdischen zu haben, und bei den toten Soldaten die während ihres letzten Kampfes starben, fanden wir etwas Ausrüstung die tatsächlich noch intakt war."
+
+CompletedSummaries[0]="Nachdem wir lange ein schwaches Signal aus der Invasionszeit verfolgten, fanden wir schließlich eine unterirdische XCOM-Fabrik. Die Einrichtung war still und tot, und Wände und Türen waren durch Plasmawaffen geschmolzen. Die damaligen Wachen, manche von ihnen Roboter, hatten fortgeschrittene Ausrüstung die von den Aliens gezielt zerstört wurde. Aber nahe dem Hauptfabrikator fanden wir eine intakte Schalttafel, und mit unserem alten XCOM-Passwort konnten wir einen Tresor mit mehreren Gegenständen öffnen."
+
+POIImages[0]="img:///UILibrary_StrategyImages.X2StrategyMap.POI_WhatsInTheBarn"
+
+[Reward_SidegradeT3 X2RewardTemplate]
+DisplayName="Prototyp-Gegenstände"

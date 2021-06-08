@@ -1,0 +1,26 @@
+[TLE_KevlarArmor X2ArmorTemplate]
+FriendlyName="Geplünderte Rüstung"
+FriendlyNamePlural="Geplünderte Rüstungen"
+BriefSummary="Diese einfache Rüstung ist ein behelfsmäßiger Schutz aus Bergungsgütern und Lagerbeständen des Widerstands. Sie bietet minimalen Schutz gegen ADVENT- und Alien-Waffen."
+TacticalText="<Bullet/> Alle Soldaten erhalten Kevlar-Rüstung als Teil ihrer Grundausstattung.\n<Bullet/> Durch Forschung erhalten wir Zugang zu besserer Rüstung."
+
+[TLE_PlatedArmor X2ArmorTemplate]
+FriendlyName="Plattenrüstungs-Prototyp"
+FriendlyNamePlural="Plattenrüstungs-Prototypen"
+BriefSummary="Dieser Anzug aus erbeuteten ADVENT-Rüstungsplatten bietet erhöhten Schutz und zusätzlichen Inventarplatz für unsere Soldaten."
+TacticalText="<Bullet/> Mittelschwere Rüstung aus ADVENT-Bergungsgut.\n<Bullet/> Als Rüstung mittlerer Klasse bietet sie Platz für einen zusätzlichen Inventargegenstand."
+
+[TLE_PoweredArmor X2ArmorTemplate]
+FriendlyName="Experimentelle Servorüstung"
+FriendlyNamePlural="Experimentelle Servorüstungen"
+BriefSummary="Unsere jüngst erworbene Beherrschung der Alien-Eleriumtechnologie hat uns zur ultimativen Kampfrüstung geführt. Eleriumbetriebene Rüstung bietet unerreichte Überlebenschancen und Vielseitigkeit im Kampf gegen immer stärker werdende Alien-Feinde."
+TacticalText="<Bullet/> Beste verfügbare mittelschwere Rüstung.\n<Bullet/> Servorüstung hat 2 Inventarplätze für Gegenstände."
+
+[SparkBit_CV X2GremlinTemplate]
+BriefSummary="The BIT-Drohne ist eine Variante unserer GREMLIN-Drohnen, bei der die internen Medizin- und Elektroschock-Systeme durch ein modulares Schwere-Waffen System ersetzt wurden."
+
+[SparkBit_MG X2GremlinTemplate]
+BriefSummary="Der Einsatz von Alien-Legierung im Design unserer BIT-Drohnen erlaubt es uns das Waffensystem merklich zu verkleinern und zusätzliche Module zur elektronischen Kriegsführungen einzubauen."
+
+[SparkBit_BM X2GremlinTemplate]
+BriefSummary="Elerium-basierte Energiezellen sind für unsere BIT-Drohnen sehr nützlich, da mehr Kampf- oder Cyberkampf-Systeme gleichzeitig aktiv sein können."
