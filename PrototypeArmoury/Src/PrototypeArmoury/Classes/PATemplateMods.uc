@@ -112,7 +112,7 @@ static function MakeItemBuildable (name TemplateName, X2ItemTemplateManager Item
 		ItemTemplate.bInfiniteItem = false;
 		ItemTemplate.CreatorTemplateName = '';
 		
-		AdjustItemCost(ItemTemplate);
+		AdjustItemCost(ItemTemplate, GetTemplateDifficulty(ItemTemplate));
 
 		`PA_Trace(ItemTemplate.Name @ "was made single-buildable" @ `showvar(ItemTemplate.Requirements.RequiredTechs.Length));
 	}
@@ -310,61 +310,28 @@ static function OverrideItemCosts ()
 		{
 			ItemTemplate = X2ItemTemplate(DataTemplate);
 
-			if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Rookie))
-			{
-				TemplateDifficulty = 0; // Rookie
-			}
-			else if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Veteran))
-			{
-				TemplateDifficulty = 1; // Veteran
-			}
-			else if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Commander))
-			{
-				TemplateDifficulty = 2; // Commander
-			}
-			else if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Legend))
-			{
-				TemplateDifficulty = 3; // Legend
-			}
-			else
-			{
-				TemplateDifficulty = -1; // Untranslatable Bitfield
-			}
+			TemplateDifficulty = GetTemplateDifficulty(ItemTemplate);
 			
 			if (ItemCostOverrideEntry.Difficulties.Find(TemplateDifficulty) > -1)
 			{
 				`PA_Trace(ItemTemplate.DataName $ " on difficulty " $ TemplateDifficulty $ " has had its cost overridden");
+				
 				ItemTemplate.Cost = ItemCostOverrideEntry.NewCost;
+
+				AdjustItemCost(ItemTemplate, TemplateDifficulty);
 			}
 		}
 	}
 }
 
-static function AdjustItemCost (X2ItemTemplate ItemTemplate)
+static function AdjustItemCost (X2ItemTemplate ItemTemplate, int TemplateDifficulty)
 {
 	local array<StrategyCostScalar> ResourceMultipliers, ArtifactMultipliers;
 	local StrategyCostScalar CostScalar;
-	local int TemplateDifficulty, i;
+	local int i;
 
-	if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Rookie))
+	if (TemplateDifficulty < 0)
 	{
-		TemplateDifficulty = 0; // Rookie
-	}
-	else if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Veteran))
-	{
-		TemplateDifficulty = 1; // Veteran
-	}
-	else if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Commander))
-	{
-		TemplateDifficulty = 2; // Commander
-	}
-	else if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Legend))
-	{
-		TemplateDifficulty = 3; // Legend
-	}
-	else
-	{
-		TemplateDifficulty = -1; // Untranslatable Bitfield
 		`PA_Trace("Cannot adjust cost - invalid difficulty");
 		return;
 	}
@@ -406,6 +373,30 @@ static function AdjustItemCost (X2ItemTemplate ItemTemplate)
 				ItemTemplate.Cost.ArtifactCosts[i].Quantity = Round(ItemTemplate.Cost.ArtifactCosts[i].Quantity * CostScalar.Scalar);
 			}
 		}
+	}
+}
+
+static function int GetTemplateDifficulty (X2ItemTemplate ItemTemplate)
+{
+	if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Rookie))
+	{
+		return 0; // Rookie
+	}
+	else if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Veteran))
+	{
+		return 1; // Veteran
+	}
+	else if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Commander))
+	{
+		return 2; // Commander
+	}
+	else if (ItemTemplate.IsTemplateAvailableToAllAreas(class'X2DataTemplate'.const.BITFIELD_GAMEAREA_Legend))
+	{
+		return 3; // Legend
+	}
+	else
+	{
+		return -1; // Untranslatable Bitfield
 	}
 }
 
