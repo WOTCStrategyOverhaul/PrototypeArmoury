@@ -318,7 +318,7 @@ static function OverrideItemCosts ()
 				
 				ItemTemplate.Cost = ItemCostOverrideEntry.NewCost;
 
-				AdjustItemCost(ItemTemplate, TemplateDifficulty);
+				if (ItemCostOverrideEntry.bApplyCostScalars) AdjustItemCost(ItemTemplate, TemplateDifficulty);
 			}
 		}
 	}
