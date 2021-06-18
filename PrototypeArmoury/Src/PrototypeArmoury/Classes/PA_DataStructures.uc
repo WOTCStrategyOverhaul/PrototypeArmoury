@@ -26,6 +26,7 @@ struct ItemCostOverride
 	var array<int> Difficulties;
 	var StrategyCost NewCost;
 	var name DLC;
+	var bool bApplyCostScalars;
 };
 
 struct AutoItemConversion
