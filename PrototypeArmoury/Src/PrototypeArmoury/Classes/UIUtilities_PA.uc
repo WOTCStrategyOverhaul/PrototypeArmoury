@@ -106,6 +106,7 @@ static function OnStripUpgradesDialogCallback (Name eAction)
 	local XComGameState UpdateState;
 	local XComGameState_HeadquartersXCom XComHQ;	
 	local EInventorySlot SlotToStrip;
+	local X2EquipmentTemplate EquipmentTemplate;
 
 	if(eAction == 'eUIAction_Accept')
 	{
@@ -118,9 +119,10 @@ static function OnStripUpgradesDialogCallback (Name eAction)
 
 		foreach Inventory(ItemRef)
 		{
-			ItemState = XComGameState_Item(`XCOMHISTORY.GetGameStateForObjectID(ItemRef.ObjectID));			
-			if (ItemState != none && ItemState.GetMyTemplate().iItemSize > 0 && 				
-				default.SlotsToStrip.Find(ItemState.InventorySlot) != INDEX_NONE &&
+			ItemState = XComGameState_Item(`XCOMHISTORY.GetGameStateForObjectID(ItemRef.ObjectID));
+			EquipmentTemplate = X2EquipmentTemplate(ItemState.GetMyTemplate());
+			if (EquipmentTemplate != none && ItemState.GetMyTemplate().iItemSize > 0 &&
+				default.SlotsToStrip.Find(EquipmentTemplate.InventorySlot) != INDEX_NONE &&
 				ItemState.GetNumUpgradeSlots() > 0 && ItemState.HasBeenModified())
 			{
 				ItemState = XComGameState_Item(UpdateState.ModifyStateObject(class'XComGameState_Item', ItemState.ObjectID));
