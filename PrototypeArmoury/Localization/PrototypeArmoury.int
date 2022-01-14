@@ -4,15 +4,15 @@ PageTitle=Prototype Armoury
 
 CanBeChangedInSaveTitle=Can be changed during a campaign
 REMOVE_NICKNAMED_UPGRADES_Label=Remove upgrades from nicknamed items
-REMOVE_NICKNAMED_UPGRADES_Tip="Disabling this will preserve any nicknamed weapon's upgrades when selecting 'MAKE UPGRADES AVAILABLE' at the squad select screen"
+REMOVE_NICKNAMED_UPGRADES_Tip="Disabling this will preserve any nicknamed item's upgrades when selecting 'MAKE UPGRADES AVAILABLE' at the squad select screen"
 
 CanNotBeChangedInSaveTitle=Can NOT be changed during a campaign
 FORCE_LOCK_AND_LOAD_Label=Always enable Lock And Load
-FORCE_LOCK_AND_LOAD_Tip=Allows to always replace weapon upgrades without destroying the previous one. Requires game restart to apply
+FORCE_LOCK_AND_LOAD_Tip=Allows to always replace item upgrades without destroying the previous one. Requires game restart to apply
 
 [UIUtilities_PA]
 strDropUpgrade=REMOVE UPGRADE
 strStripUpgrades=MAKE UPGRADES AVAILABLE
-strStripUpgradesTooltip=Remove all weapon upgrades from primary weapons NOT equipped by soldiers selected for current mission duty.
-strStripUpgradesConfirm=CONFIRM WEAPON UPGRADES AVAILABLE
-strStripUpgradesConfirmDesc=Confirm removal of all weapon upgrades from all primary weapons NOT equipped by soldiers for current mission duty. These weapon upgrades will become available immediately. Upgrades from weapons with nicknames will be <XGParam:StrValue0>. This can be changed in MCM.
+strStripUpgradesTooltip=Remove all upgrades from items NOT equipped by soldiers selected for current mission duty.
+strStripUpgradesConfirm=CONFIRM UPGRADES AVAILABLE
+strStripUpgradesConfirmDesc=Confirm removal of all upgrades from items NOT equipped by soldiers for current mission duty. These upgrades will become available immediately. Upgrades from items with nicknames will be <XGParam:StrValue0>. This can be changed in MCM.
