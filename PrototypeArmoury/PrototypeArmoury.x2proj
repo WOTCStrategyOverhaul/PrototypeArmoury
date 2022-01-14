@@ -48,6 +48,9 @@
     <Content Include="Config\XComPrototypeArmoury_DEFAULT.ini">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Config\XComUI.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Localization\Items\XComGame.int">
       <SubType>Content</SubType>
     </Content>
@@ -155,7 +158,7 @@
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>
-    <PropertyGroup>
+  <PropertyGroup>
     <SolutionRoot>$(MSBuildProjectDirectory)\..\</SolutionRoot>
     <ScriptsDir>$(SolutionRoot).scripts\</ScriptsDir>
     <BuildCommonRoot>$(ScriptsDir)X2ModBuildCommon\</BuildCommonRoot>
