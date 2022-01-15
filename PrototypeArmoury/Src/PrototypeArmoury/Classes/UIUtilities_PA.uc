@@ -9,7 +9,7 @@ var localized string strStripUpgradesTooltip;
 var localized string strStripUpgradesConfirm;
 var localized string strStripUpgradesConfirmDesc;
 
-var config array<EInventorySlot> SlotsToStrip;
+var config array<EInventorySlot> SlotsToStripUpgrades;
 
 ////////////////////////////////
 /// Removing weapon upgrades ///
@@ -105,8 +105,9 @@ static function OnStripUpgradesDialogCallback (Name eAction)
 	local StateObjectReference ItemRef;
 	local XComGameState UpdateState;
 	local XComGameState_HeadquartersXCom XComHQ;	
-	local EInventorySlot SlotToStrip;
+	local EInventorySlot SlotToStripUpgrade;
 	local X2EquipmentTemplate EquipmentTemplate;
+	local array<XComGameState_Item> ItemStates;
 
 	if(eAction == 'eUIAction_Accept')
 	{
@@ -122,7 +123,7 @@ static function OnStripUpgradesDialogCallback (Name eAction)
 			ItemState = XComGameState_Item(`XCOMHISTORY.GetGameStateForObjectID(ItemRef.ObjectID));
 			EquipmentTemplate = X2EquipmentTemplate(ItemState.GetMyTemplate());
 			if (EquipmentTemplate != none && ItemState.GetMyTemplate().iItemSize > 0 &&
-				default.SlotsToStrip.Find(EquipmentTemplate.InventorySlot) != INDEX_NONE &&
+				default.SlotsToStripUpgrades.Find(EquipmentTemplate.InventorySlot) != INDEX_NONE &&
 				ItemState.GetNumUpgradeSlots() > 0 && ItemState.HasBeenModified())
 			{
 				ItemState = XComGameState_Item(UpdateState.ModifyStateObject(class'XComGameState_Item', ItemState.ObjectID));
@@ -139,12 +140,10 @@ static function OnStripUpgradesDialogCallback (Name eAction)
 					}
 				}
 				
-				if (!ItemState.HasBeenModified() && !ItemState.GetMyTemplate().bAlwaysUnique)
+				if (!ItemState.HasBeenModified() && !EquipmentTemplate.bAlwaysUnique &&
+					EquipmentTemplate.bInfiniteItem)
 				{
-					if (ItemState.GetMyTemplate().bInfiniteItem)
-					{
-						XComHQ.Inventory.RemoveItem(ItemRef);
-					}
+					XComHQ.Inventory.RemoveItem(ItemRef);
 				}
 			}
 		}
@@ -156,22 +155,25 @@ static function OnStripUpgradesDialogCallback (Name eAction)
 			UnitState = XComGameState_Unit(UpdateState.ModifyStateObject(class'XComGameState_Unit', Soldiers[idx].ObjectID));
 			if (UnitState != none)
 			{
-				foreach default.SlotsToStrip(SlotToStrip)
+				foreach default.SlotsToStripUpgrades(SlotToStripUpgrade)
 				{
-					ItemState = UnitState.GetItemInSlot(SlotToStrip);
-					if (ItemState != none && ItemState.GetNumUpgradeSlots() > 0)
+					ItemStates = UnitState.GetAllItemsInSlot(SlotToStripUpgrade);
+					foreach ItemStates(ItemState)
 					{
-						ItemState = XComGameState_Item(UpdateState.ModifyStateObject(class'XComGameState_Item', ItemState.ObjectID));
-						EquippedUpgrades = ItemState.GetMyWeaponUpgradeTemplates();
-
-						if (ShouldRemoveNicknamedUpgrades(ItemState))
+						if (ItemState != none && ItemState.GetNumUpgradeSlots() > 0)
 						{
-							ItemState.WipeUpgradeTemplates();
+							ItemState = XComGameState_Item(UpdateState.ModifyStateObject(class'XComGameState_Item', ItemState.ObjectID));
+							EquippedUpgrades = ItemState.GetMyWeaponUpgradeTemplates();
 
-							foreach EquippedUpgrades(UpgradeTemplate)
+							if (ShouldRemoveNicknamedUpgrades(ItemState))
 							{
-								UpgradeItem = UpgradeTemplate.CreateInstanceFromTemplate(UpdateState);
-								XComHQ.PutItemInInventory(UpdateState, UpgradeItem);
+								ItemState.WipeUpgradeTemplates();
+
+								foreach EquippedUpgrades(UpgradeTemplate)
+								{
+									UpgradeItem = UpgradeTemplate.CreateInstanceFromTemplate(UpdateState);
+									XComHQ.PutItemInInventory(UpdateState, UpgradeItem);
+								}
 							}
 						}
 					}
