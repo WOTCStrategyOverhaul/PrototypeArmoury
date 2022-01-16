@@ -1,4 +1,4 @@
-class UIUtilities_PA extends Object;
+class UIUtilities_PA extends Object config (UI);
 
 `include(PrototypeArmoury\Src\ModConfigMenuAPI\MCM_API_CfgHelpers.uci)
 
@@ -8,6 +8,8 @@ var localized string strStripUpgrades;
 var localized string strStripUpgradesTooltip;
 var localized string strStripUpgradesConfirm;
 var localized string strStripUpgradesConfirmDesc;
+
+var config array<EInventorySlot> SlotsToStripUpgrades;
 
 ////////////////////////////////
 /// Removing weapon upgrades ///
@@ -102,8 +104,10 @@ static function OnStripUpgradesDialogCallback (Name eAction)
 	local array<StateObjectReference> Inventory;
 	local StateObjectReference ItemRef;
 	local XComGameState UpdateState;
-	local XComGameState_HeadquartersXCom XComHQ;
-	local X2WeaponTemplate WeaponTemplate;
+	local XComGameState_HeadquartersXCom XComHQ;	
+	local EInventorySlot SlotToStripUpgrade;
+	local X2EquipmentTemplate EquipmentTemplate;
+	local array<XComGameState_Item> ItemStates;
 
 	if(eAction == 'eUIAction_Accept')
 	{
@@ -117,10 +121,10 @@ static function OnStripUpgradesDialogCallback (Name eAction)
 		foreach Inventory(ItemRef)
 		{
 			ItemState = XComGameState_Item(`XCOMHISTORY.GetGameStateForObjectID(ItemRef.ObjectID));
-			WeaponTemplate = X2WeaponTemplate(ItemState.GetMyTemplate());
-			if (WeaponTemplate != none && ItemState.GetMyTemplate().iItemSize > 0 && 
-				WeaponTemplate.InventorySlot == eInvSlot_PrimaryWeapon && 
-				WeaponTemplate.NumUpgradeSlots > 0 && ItemState.HasBeenModified())
+			EquipmentTemplate = X2EquipmentTemplate(ItemState.GetMyTemplate());
+			if (EquipmentTemplate != none && ItemState.GetMyTemplate().iItemSize > 0 &&
+				default.SlotsToStripUpgrades.Find(EquipmentTemplate.InventorySlot) != INDEX_NONE &&
+				ItemState.GetNumUpgradeSlots() > 0 && ItemState.HasBeenModified())
 			{
 				ItemState = XComGameState_Item(UpdateState.ModifyStateObject(class'XComGameState_Item', ItemState.ObjectID));
 				EquippedUpgrades = ItemState.GetMyWeaponUpgradeTemplates();
@@ -136,12 +140,10 @@ static function OnStripUpgradesDialogCallback (Name eAction)
 					}
 				}
 				
-				if (!ItemState.HasBeenModified() && !WeaponTemplate.bAlwaysUnique)
+				if (!ItemState.HasBeenModified() && !EquipmentTemplate.bAlwaysUnique &&
+					EquipmentTemplate.bInfiniteItem)
 				{
-					if (WeaponTemplate.bInfiniteItem)
-					{
-						XComHQ.Inventory.RemoveItem(ItemRef);
-					}
+					XComHQ.Inventory.RemoveItem(ItemRef);
 				}
 			}
 		}
@@ -153,21 +155,26 @@ static function OnStripUpgradesDialogCallback (Name eAction)
 			UnitState = XComGameState_Unit(UpdateState.ModifyStateObject(class'XComGameState_Unit', Soldiers[idx].ObjectID));
 			if (UnitState != none)
 			{
-				ItemState = UnitState.GetItemInSlot(eInvSlot_PrimaryWeapon);
-				WeaponTemplate = X2WeaponTemplate(ItemState.GetMyTemplate());
-				if (WeaponTemplate != none && WeaponTemplate.NumUpgradeSlots > 0)
+				foreach default.SlotsToStripUpgrades(SlotToStripUpgrade)
 				{
-					ItemState = XComGameState_Item(UpdateState.ModifyStateObject(class'XComGameState_Item', ItemState.ObjectID));
-					EquippedUpgrades = ItemState.GetMyWeaponUpgradeTemplates();
-
-					if (ShouldRemoveNicknamedUpgrades(ItemState))
+					ItemStates = UnitState.GetAllItemsInSlot(SlotToStripUpgrade);
+					foreach ItemStates(ItemState)
 					{
-						ItemState.WipeUpgradeTemplates();
-
-						foreach EquippedUpgrades(UpgradeTemplate)
+						if (ItemState != none && ItemState.GetNumUpgradeSlots() > 0)
 						{
-							UpgradeItem = UpgradeTemplate.CreateInstanceFromTemplate(UpdateState);
-							XComHQ.PutItemInInventory(UpdateState, UpgradeItem);
+							ItemState = XComGameState_Item(UpdateState.ModifyStateObject(class'XComGameState_Item', ItemState.ObjectID));
+							EquippedUpgrades = ItemState.GetMyWeaponUpgradeTemplates();
+
+							if (ShouldRemoveNicknamedUpgrades(ItemState))
+							{
+								ItemState.WipeUpgradeTemplates();
+
+								foreach EquippedUpgrades(UpgradeTemplate)
+								{
+									UpgradeItem = UpgradeTemplate.CreateInstanceFromTemplate(UpdateState);
+									XComHQ.PutItemInInventory(UpdateState, UpgradeItem);
+								}
+							}
 						}
 					}
 				}
