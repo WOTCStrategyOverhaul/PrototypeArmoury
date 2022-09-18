@@ -1,0 +1,26 @@
+[TLE_KevlarArmor X2ArmorTemplate]
+FriendlyName="Armure récupérée".
+FriendlyNamePlural="Armurse récupérée".
+BriefSummary="Cette armure de base consiste en une protection improvisée bricolée à partir de caches d'armes de récupération et de résistance. Elle offre une protection minimale contre les armes ADVENT et aliens."
+TacticalText="<Bullet/> Tous les soldats reçoivent une armure en Kevlar dans leur équipement de base.<br />La recherche peut nous donner accès à une meilleure armure."
+
+[TLE_PlatedArmor X2ArmorTemplate]
+FriendlyName="Prototype d'armue renforcée"
+FriendlyNamePlural="Prototypes d'armues renforcée"
+BriefSummary="Utilisant des plaques récupérées d'armures ADVENT, cette combinaison offre une protection accrue et une capacité d'inventaire supplémentaire à nos soldats."
+TacticalText="<Bullet/> Armure de poids moyen basée sur des récupérations ADVENT.\n<Bullet/> En tant qu'armure de classe moyenne, elle offre un emplacement pour un objet d'inventaire supplémentaire."
+
+[TLE_PoweredArmor X2ArmorTemplate]
+FriendlyName="Armure motorisée expérimentale".
+FriendlyNamePlural="Armure motorisées expérimentale".
+BriefSummary="Notre nouvelle maîtrise de la technologie Elerium des extraterrestres nous a permis de mettre au point l'armure de combat ultime. L'armure alimentée à l'Elerium offre une capacité de survie et une polyvalence sans précédent dans la lutte contre des ennemis extraterrestres de plus en plus puissants."
+TacticalText="<Bullet/> Une armure de classe moyenne de premier ordre est disponible.<br />L'armure électrique dispose de 2 emplacements pour des objets dans l'inventaire."
+
+[SparkBit_CV X2GremlinTemplate]
+BriefSummary="Le BIT est une variation de notre drone GREMLIN, avec les sous-systèmes medikit et electroshock remplacés par un montage d'armes lourdes."
+
+[SparkBit_MG X2GremlinTemplate]
+BriefSummary="L'ajout d'alliages aliens à la conception du TBI nous permet de miniaturiser le lanceur et de faire de la place pour des modules de guerre électronique supplémentaires."
+
+[SparkBit_BM X2GremlinTemplate]
+BriefSummary="Les cellules d'alimentation en elerium ont une utilité particulière lorsqu'elles sont appliquées à nos conceptions de drones, augmentant considérablement la puissance de sortie et les capacités de cyberguerre."

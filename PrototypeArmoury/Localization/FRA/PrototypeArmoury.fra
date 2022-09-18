@@ -1,0 +1,14 @@
+CanBeChangedInSaveTitle=Peut être modifié au cours d'une campagne
+REMOVE_NICKNAMED_UPGRADES_Label=Supprime les améliorations des objets renommés
+REMOVE_NICKNAMED_UPGRADES_Tip="En désactivant cette option, vous préserverez les améliorations de tout objet portant un surnom lorsque vous sélectionnerez 'RENDRE AMELIORATION DISPONIBLES' sur l'écran de sélection de l'équipe".
+
+CanNotBeChangedInSaveTitle=Ne peut PAS être modifié pendant une campagne.
+FORCE_LOCK_AND_LOAD_Label=Toujours activer le verrouillage et le chargement.
+FORCE_LOCK_AND_LOAD_Tip=Permet de toujours remplacer les améliorations d'objets sans détruire la précédente. Nécessite un redémarrage du jeu pour être appliqué
+
+[UIUtilities_PA]
+strDropUpgrade=RETIRE LES AMELIORATIONS
+strStripUpgrades=REND LES AMELIORATIONS DISPONIBLES (rendre les améliorations disponibles)
+strStripUpgradesTooltip=Supprimme toutes les améliorations des objets NON équipés par les soldats pour la mission en cours.
+strStripUpgradesConfirm=CONFIRMER LES AMÉLIORATIONS DISPONIBLES
+strStripUpgradesConfirmDesc=Confirme la suppression de toutes les améliorations des objets NON équipés par les soldats pour la mission en cours. Ces améliorations seront disponibles immédiatement. Les améliorations des objets avec des surnoms seront <XGParam:StrValue0>. Cela peut être modifié dans MCM.
