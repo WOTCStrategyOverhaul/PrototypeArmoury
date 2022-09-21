@@ -25,7 +25,7 @@ CompletedSummaries[0]="La résistance locale nous a signalé l'existence d'un bu
 
 POIImages[0]="img:///UILibrary_StrategyImages.X2StrategyMap.POI_RadioTower"
 
-[Récompense_SidegradeT1 X2RewardTemplate]
+[Reward_SidegradeT1 X2RewardTemplate]
 DisplayName="Prototype d'objets"
 
 [POI_Sidegrade_T2 X2PointOfInterestTemplate]
