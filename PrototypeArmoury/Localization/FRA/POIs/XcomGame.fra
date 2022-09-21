@@ -5,7 +5,7 @@ CompletedSummaries[0]="Lors d'un balayage dans cette zone, nous avons détecté 
 
 POIImages[0]="img:///UILibrary_StrategyImages.X2StrategyMap.POI_OvergrownCity"
 
-[Récompense_PrototypeT2 X2RewardTemplate]
+[Reward_SidegradeT2 X2RewardTemplate]
 DisplayName="Prototype avancé"
 
 [POI_Prototype_T3 X2PointOfInterestTemplate]
@@ -15,7 +15,7 @@ CompletedSummaries[0]="En suivant un signal utilisé par XCOM pendant l'invasion
 
 POIImages[0]="img:///UILibrary_StrategyImages.X2StrategyMap.POI_WhatsInTheBarn"
 
-[Récompense_PrototypeT3 X2RewardTemplate]
+[Reward_SidegradeT3 X2RewardTemplate]
 DisplayName="Prototype avancé"
 
 [POI_Sidegrade_T1 X2PointOfInterestTemplate]
@@ -35,7 +35,7 @@ CompletedSummaries[0]="Lors d'un balayage dans cette zone, nous avons détecté 
 
 POIImages[0]="img:///UILibrary_StrategyImages.X2StrategyMap.POI_OvergrownCity"
 
-[Récompense_SidegradeT2 X2RewardTemplate]
+[Reward_SidegradeT2 X2RewardTemplate]
 DisplayName="Prototype d'objets"
 
 [POI_Sidegrade_T3 X2PointOfInterestTemplate]
@@ -45,5 +45,5 @@ CompletedSummaries[0]="En suivant un signal utilisé par XCOM pendant l'invasion
 
 POIImages[0]="img:///UILibrary_StrategyImages.X2StrategyMap.POI_WhatsInTheBarn"
 
-[Récompense_SidegradeT3 X2RewardTemplate]
+[Reward_SidegradeT3 X2RewardTemplate]
 DisplayName="Prototype d'objets"
