@@ -1,0 +1,49 @@
+[POI_Prototype_T2 X2PointOfInterestTemplate]
+DisplayNames[0]="SOS de la Résistance".
+
+CompletedSummaries[0]="Lors d'un balayage dans cette zone, nous avons détecté un signal SOS provenant d'une structure cachée dans les ruines de la ville. Il semble que certains scientifiques aient fait défection à ADVENT et aient continué leurs recherches en se cachant. Nous ne savons pas ce qui leur est arrivé, mais sous une poutre de soutien effondrée, nous avons trouvé un prototype fonctionnel qui semble dépasser tout ce que nous avons encore développé."
+
+POIImages[0]="img:///UILibrary_StrategyImages.X2StrategyMap.POI_OvergrownCity"
+
+[Reward_SidegradeT2 X2RewardTemplate]
+DisplayName="Prototype avancé"
+
+[POI_Prototype_T3 X2PointOfInterestTemplate]
+DisplayNames[0]="Ancien signal XCOM".
+
+CompletedSummaries[0]="En suivant un signal utilisé par XCOM pendant l'invasion, nous avons trouvé un bunker souterrain, apparemment un laboratoire de recherche hors site. L'installation est déserte, et les impacts de plasma marquent les murs. Les défenseurs semblent avoir été armés d'un équipement comparable à celui conçu par les aliens, et parmi les soldats tombés lors de la dernière bataille, nous avons trouvé un objet encore intact."
+
+POIImages[0]="img:///UILibrary_StrategyImages.X2StrategyMap.POI_WhatsInTheBarn"
+
+[Reward_SidegradeT3 X2RewardTemplate]
+DisplayName="Prototype avancé"
+
+[POI_Sidegrade_T1 X2PointOfInterestTemplate]
+DisplayNames[0]="Bunker de l'ancien monde".
+
+CompletedSummaries[0]="La résistance locale nous a signalé l'existence d'un bunker de l'ancien monde caché dans les montagnes. Les scanners du Vengeur l'ont facilement localisé, mais malheureusement les pièces les plus intérieures du bunker ont été éliminées par une frappe directe d'une arme à plasma orbitale. Cependant, il y avait plusieurs pièces secondaires qui étaient suffisamment éloignées pour être épargnées, et dans l'une d'entre elles, nous avons trouvé une armurerie avec quelques armes anciennes intactes."
+
+POIImages[0]="img:///UILibrary_StrategyImages.X2StrategyMap.POI_RadioTower"
+
+[Reward_SidegradeT1 X2RewardTemplate]
+DisplayName="Prototype d'objets"
+
+[POI_Sidegrade_T2 X2PointOfInterestTemplate]
+DisplayNames[0]="SOS de la Résistance".
+
+CompletedSummaries[0]="Lors d'un balayage dans cette zone, nous avons détecté un signal SOS provenant d'une structure cachée dans les ruines de la ville. Il semble que certains ingénieurs ont fait défection à ADVENT et ont continué leurs projets en se cachant. Nous ne savons pas ce qui leur est arrivé, mais en utilisant l'équipement de balayage du Vengeur, nous avons pu identifier un coffre-fort métallique, enterré à plusieurs mètres sous terre. Nous l'avons excavé et avons trouvé quelques exemples du travail des ingénieurs."
+
+POIImages[0]="img:///UILibrary_StrategyImages.X2StrategyMap.POI_OvergrownCity"
+
+[Reward_SidegradeT2 X2RewardTemplate]
+DisplayName="Prototype d'objets"
+
+[POI_Sidegrade_T3 X2PointOfInterestTemplate]
+DisplayNames[0]= "Ancien signal d'XCOM".
+
+CompletedSummaries[0]="En suivant un signal utilisé par XCOM pendant l'invasion, nous avons trouvé un bunker souterrain, apparemment une usine hors site. L'installation est déserte, et les impacts de plasma marquent les murs. Les défenseurs semblent avoir été armés avec des équipements très avancés, toutes rendus inutilisables par les aliens. Mais près de l'autofabrication principale, un panneau de contrôle était encore allumé. Il a accepté un de nos anciens codes, et a ouvert un coffre rempli de plusieurs objets."
+
+POIImages[0]="img:///UILibrary_StrategyImages.X2StrategyMap.POI_WhatsInTheBarn"
+
+[Reward_SidegradeT3 X2RewardTemplate]
+DisplayName="Prototype d'objets"
